@@ -1,10 +1,10 @@
 # tp-final
 
-## Project setup
+## Primer Commit 
 ```
-npm install
-```
+El primer commit tiene la estructura del proyecto usando vue CLI + router y Eslint
 
+```
 ### Compiles and hot-reloads for development
 ```
 npm run serve
@@ -15,10 +15,3 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
