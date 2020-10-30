@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/miPerfil">MiPerfil</router-link>|
-      <router-link to="/mission">OurMission</router-link>|
-      <router-link to="/listaPublicaciones">ListaPublicaciones</router-link>|
-      <router-link to="/mapaPublicaciones">MapaPublicaciones</router-link>|
+      <BarraNavegacion></BarraNavegacion>
     </div>
     <router-view />
 
@@ -14,9 +10,12 @@
 
 
 <script>
-
+import BarraNavegacion from "../src/components/BarraNavegacion.vue";
 export default {
- 
+  name:"app",
+  components:{
+      BarraNavegacion
+  }
 
 };
 </script>
