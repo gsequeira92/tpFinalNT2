@@ -42,6 +42,13 @@ const routes = [
     name: "mapa-publicaciones",
     component: MapaPublicaciones
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/login.vue")
+   
+  },
 ];
 
 const router = new VueRouter({
