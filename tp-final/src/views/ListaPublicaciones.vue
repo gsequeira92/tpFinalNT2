@@ -9,11 +9,9 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "lista-publicaciones",
-
   data() {
     return {
       items: [

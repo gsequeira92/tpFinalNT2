@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import OurMission from "../views/OurMission.vue"
 import ListaPublicaciones from "../views/ListaPublicaciones.vue"
 import MapaPublicaciones from "../views/MapaPublicaciones.vue"
 
@@ -23,12 +22,6 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/MiPerfil.vue")
-  },
-
-  {
-    path: "/mission",
-    name: "OurMission",
-    component: OurMission
   },
 
   {

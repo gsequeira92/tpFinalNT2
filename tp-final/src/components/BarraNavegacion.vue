@@ -7,7 +7,6 @@
         >
         <b-nav-item to="/">Home</b-nav-item>
         <b-nav-item to="/#/miPerfil">Mi Perfil</b-nav-item>
-        <b-nav-item to="/#/mission">Our Mission</b-nav-item>
         <b-nav-item to="/#/listaPublicaciones"
           >Listado Publicaciones</b-nav-item
         >
