@@ -4,7 +4,6 @@
       <BarraNavegacion></BarraNavegacion>
     </div>
     <router-view />
-
   </div>
 </template>
 

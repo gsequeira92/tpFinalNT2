@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <TarjetasHome></TarjetasHome>
     <Carrusel></Carrusel>
+    <TarjetasHome></TarjetasHome>
     <Descripcion></Descripcion>
     <GoogleMap></GoogleMap>
     <Footer></Footer>
