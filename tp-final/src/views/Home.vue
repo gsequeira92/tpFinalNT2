@@ -2,8 +2,8 @@
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <Carrusel></Carrusel>
-    <TarjetasHome></TarjetasHome>
     <Descripcion></Descripcion>
+    <TarjetasHome></TarjetasHome>
     <GoogleMap></GoogleMap>
     <Footer></Footer>
   </div>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <hr width="100%" size="10" noshade="noshade" />
+
     <b-carousel
       id="carousel-1"
       fade="true"
@@ -16,7 +17,7 @@
       ><b-carousel-slide
         caption="Primera foto del carrusel"
         text="Esta probablemente podria ser una parte para mostrar y linkear fotos de lo que suban los usuarios"
-        img-src="https://picsum.photos/1024/480/?image=17"
+        img-src="https://picsum.photos/1024/480/?image=120"
       ></b-carousel-slide>
       <b-carousel-slide
         caption="Segunda foto del carrusel"
