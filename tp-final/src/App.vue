@@ -6,8 +6,6 @@
     <router-view />
   </div>
 </template>
-
-
 <script>
 import BarraNavegacion from "../src/components/BarraNavegacion.vue";
 export default {
@@ -18,9 +16,3 @@ export default {
 
 };
 </script>
-
-
-
-
-
-

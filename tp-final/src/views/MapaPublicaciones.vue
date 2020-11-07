@@ -2,48 +2,87 @@
   <div>
     <hr />
     <b-container fluid>
-      <b-row>
-        <b-col cols="2"
-          >ACA VAN A IR LOS FILTROS
-          <ul>
-            <li>
-              FILTRO
-            </li>
-            <li>
-              FILTRO
-            </li>
-            <li>
-              FILTRO
-            </li>
-            <li>
-              FILTRO
-            </li>
-            <li>
-              FILTRO
-            </li>
-            <li>
-              FILTRO
-            </li>
-          </ul>
+      <b-row class="vh-100">
+        <b-col cols="2">
+          <b-row align-v="start">1</b-row>
+          <b-row align-v="center">2</b-row>
+          <b-row align-v="end">3</b-row>
         </b-col>
-        <b-col cols="10">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105073.44379365811!2d-58.503509623920586!3d-34.61566236073897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3b4ef90cbd%3A0xa0b3812e88e88e87!2sBuenos%20Aires!5e0!3m2!1sen!2sar!4v1604072144741!5m2!1sen!2sar"
-            width="1550"
-            height="890"
-            frameborder="80"
-            style="border:1;"
-            allowfullscreen=""
-            aria-hidden="false"
-            tabindex="0"
-          ></iframe
-        ></b-col>
+        <b-col>
+          <gmapsMap :options="mapOptions">
+            <gmapsMarker
+              v-for="(item, i) in items"
+              :key="i"
+              :position="item.position"
+              :icon="item.icon"
+              >
+            </gmapsMarker>
+          </gmapsMap>
+        </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
 <script>
+import { gmapsMap, gmapsMarker } from "x5-gmaps";
+
+const greenMarker = require("../assets/campfire.png");
+
 export default {
-  name: "Mapa-publicaciones"
+  name: "MapaBuzon",
+  components: {
+    gmapsMap,
+    gmapsMarker
+  },
+  data() {
+    return {
+      mapOptions: {
+        center: { lat: -34.6083, lng: -58.445 },
+        zoom: 13,
+        fullscreenControl: false,
+        mapTypeControl: true,
+        rotateControl: true,
+        scaleControl: true,
+        streetViewControl: false,
+        zoomControl: true
+      },
+      items: [
+        {
+          position: { lat: -34.606868, lng: -58.435875 },
+          icon: greenMarker
+        },
+
+        {
+          position: { lat: -34.593988, lng: -58.489948 },
+          icon: greenMarker
+        },
+        {
+          position: { lat: -34.571406, lng: -58.416048 },
+          icon: greenMarker
+        },
+        {
+          position: { lat: -34.583528, lng: -58.409573 },
+          icon: greenMarker
+        },
+        {
+          position: { lat: -34.60967, lng: -58.390068 },
+          icon: greenMarker
+        },
+        {
+          position: { lat: -34.551013, lng: -58.480165 },
+          icon: greenMarker
+        },
+        {
+          position: { lat: -34.614216, lng: -58.458122 },
+          icon: greenMarker
+        }
+      ]
+    };
+  },
+  mounted() {
+    this.items.forEach(element => {
+      this.$GMaps().then(GMaps => (element.animation = GMaps.Animation.BOUNCE));
+    });
+  }
 };
 </script>

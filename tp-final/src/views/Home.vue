@@ -3,8 +3,8 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <Carrusel></Carrusel>
     <Descripcion></Descripcion>
+    <MapaHome></MapaHome>
     <TarjetasHome></TarjetasHome>
-    <GoogleMap></GoogleMap>
     <Footer></Footer>
   </div>
 </template>
@@ -12,19 +12,19 @@
 <script>
 // @ is an alias to /src
 import TarjetasHome from "@/components/TarjetasHome.vue";
-import GoogleMap from "../components/MapaHome.vue";
 import Descripcion from "../components/DescripcionHome.vue";
 import Footer from "../components/FooterHome.vue";
 import Carrusel from "../components/CarruselHome.vue";
+import MapaHome from "../components/MapaHome.vue";
 
 export default {
   name: "Home",
   components: {
     TarjetasHome,
-    GoogleMap,
     Descripcion,
     Footer,
-    Carrusel
+    Carrusel,
+    MapaHome
   }
 };
 </script>
