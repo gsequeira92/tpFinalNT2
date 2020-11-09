@@ -19,13 +19,13 @@
            class="d-block img-fluid w-100"
             caption="Primera foto del carrusel"
             text="Esta probablemente podria ser una parte para mostrar y linkear fotos de lo que suban los usuarios"
-            img-src="https://picsum.photos/1024/480/?image=120"
+            img-src="https://picsum.photos/600/300/?image=400"
           ></b-carousel-slide>
           <b-carousel-slide
            class="d-block img-fluid w-100"
             caption="Segunda foto del carrusel"
             text="Esta probablemente podria ser una parte para mostrar y linkear fotos de lo que suban los usuarios"
-            img-src="https://picsum.photos/1024/480/?image=222"
+            img-src="https://picsum.photos/600/300/?image=35"
           ></b-carousel-slide>
         </b-carousel>
       </b-row>

@@ -4,9 +4,17 @@
     <b-container fluid>
       <b-row class="vh-100">
         <b-col cols="2">
-          <b-row align-v="start">1</b-row>
-          <b-row align-v="center">2</b-row>
-          <b-row align-v="end">3</b-row>
+          <h3>Filtrar por:</h3>
+          <hr />
+          <b-list-group>
+            <b-list-group-item button variant="info">Buzón 1</b-list-group-item>
+            <b-list-group-item button variant="info">Buzón 2</b-list-group-item>
+            <b-list-group-item button variant="info">Buzón 3</b-list-group-item>
+            <b-list-group-item button variant="info">Buzón 4</b-list-group-item>
+            <b-list-group-item button variant="info">Buzón 5</b-list-group-item>
+            <b-list-group-item button variant="info">Buzón 6</b-list-group-item>
+            <b-list-group-item button variant="info">Buzón 7</b-list-group-item>
+          </b-list-group>
         </b-col>
         <b-col>
           <gmapsMap :options="mapOptions">
@@ -15,7 +23,7 @@
               :key="i"
               :position="item.position"
               :icon="item.icon"
-              >
+            >
             </gmapsMarker>
           </gmapsMap>
         </b-col>

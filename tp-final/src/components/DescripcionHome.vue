@@ -2,22 +2,20 @@
   <div id="HomeDescription">
     <b-container>
       <b-row>
-        <b>Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.</b>
+        <b
+          >Viendo los reducidos espacios verdes en la ciudad y los altos precios
+          de las plantas en los viveros, este proyecto está apuntado a
+          consolidar la comunidad de aficionados o profesionales de la
+          jardinería que les interesa fomentar esta práctica mediante donaciones
+          o intercambios sin fines de lucro alguno.
+        </b>
       </b-row>
     </b-container>
-    <hr>
+    <hr />
   </div>
 </template>
 <script>
 export default {
-    Description: "Descripcion"
+  Description: "Descripcion"
 };
 </script>

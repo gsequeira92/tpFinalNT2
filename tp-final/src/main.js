@@ -5,14 +5,17 @@ import x5GMaps from 'x5-gmaps'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import fs from 'fs';
 
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false;
 
-Vue.use(x5GMaps, 'AIzaSyDepqCDefpySWOThDij3luS--95K-vhP-s')
+async function recibirArchivo() {
+  return await fs.readFile('C:/Gaston Folder/ORT/PNT2/mapsKey.txt', 'uft8')
+}
 
-
+Vue.use(x5GMaps, recibirArchivo())
 
 new Vue({
   router,
