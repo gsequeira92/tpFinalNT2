@@ -19,7 +19,7 @@
       <b-navbar-nav class="ml-auto">
         <b-button style="display:inline-flex;" pill variant="outline-success">
           <b-nav-item-dropdown right> 
-            <b-dropdown-item to="/#/miPerfil">Mi Perfil</b-dropdown-item>
+            <b-dropdown-item to="/#/login">Mi Perfil</b-dropdown-item>
             <b-dropdown-item to="/#/login">LogIn</b-dropdown-item>
           </b-nav-item-dropdown><b>User Menu</b></b-button>
       </b-navbar-nav>
