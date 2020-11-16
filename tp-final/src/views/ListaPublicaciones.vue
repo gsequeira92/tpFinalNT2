@@ -2,7 +2,6 @@
   <div>
     <b-container fluid>
       <b-row class="vh-100">
-       
         <b-col>
           <b-container>
             <b-card-group deck>
@@ -19,17 +18,35 @@
                     >Nombre Usuario</b-card-sub-title
                   >
                   <b-card-text>
-                    Descripcion de nuestra amada planta por intercambiarse
-                    log in {{nrolog}}
+                    Descripcion de nuestra amada planta por intercambiarse log
+                    in {{ nrolog }}
                   </b-card-text>
                 </b-card-body>
 
                 <b-card-body>
-                  <b-button pill  class="card-link" variant="success"
+                  <b-button
+                    pill
+                    @click="reservar"
+                    class="card-link"
+                    variant="success"
+                    v-show="nrolog !== 0"
                     >Reservar
                   </b-button>
-                  <b-button pill href="#" class="card-link" variant="success"
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="success"
+                    v-show="nrolog !== 0"
                     >Editar</b-button
+                  >
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="secondary"
+                    v-if="nrolog === 2"
+                    >Eliminar</b-button
                   >
                 </b-card-body>
               </b-card>
@@ -42,7 +59,7 @@
                 img-top
                 v-show="reservado == false"
               >
-                <b-card-body >
+                <b-card-body>
                   <b-card-title>Nombre Planta</b-card-title>
                   <b-card-sub-title class="mb-2"
                     >Nombre Usuario</b-card-sub-title
@@ -52,12 +69,30 @@
                   </b-card-text>
                 </b-card-body>
 
-                <b-card-body >
-                  <b-button pill @click="reservar" class="card-link" variant="success" v-show="nrolog!==0"
+                <b-card-body>
+                  <b-button
+                    pill
+                    @click="reservar"
+                    class="card-link"
+                    variant="success"
+                    v-show="nrolog !== 0"
                     >Reservar
                   </b-button>
-                  <b-button pill href="#" class="card-link" variant="success" v-show="nrolog!==0"
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="success"
+                    v-show="nrolog !== 0"
                     >Editar</b-button
+                  >
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="secondary"
+                    v-if="nrolog === 2"
+                    >Eliminar</b-button
                   >
                 </b-card-body>
               </b-card>
@@ -80,17 +115,38 @@
                 </b-card-body>
 
                 <b-card-body>
-                  <b-button pill href="#"  class="card-link" variant="success" v-if="nrolog===1" 
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="success"
+                    v-if="nrolog === 1"
                     >Reservar
                   </b-button>
-                   <b-button pill href="#" class="card-link" variant="danger" v-else
-                    >Reservar
-                  </b-button>
-                  <b-button pill href="#" class="card-link" variant="success"  v-if="nrolog===1" 
+              
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="success"
+                    v-if="nrolog === 1"
                     >Editar</b-button
                   >
-                    <b-button pill href="#" class="card-link" variant="danger" v-else
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="danger"
+                    v-else
                     >Editar</b-button
+                  >
+                  <b-button
+                    pill
+                    href="#"
+                    class="card-link"
+                    variant="secondary"
+                    v-if="nrolog === 2"
+                    >Eliminar</b-button
                   >
                 </b-card-body>
               </b-card>
@@ -103,25 +159,23 @@
 </template>
 
 <script>
-
 export default {
   name: "lista-publicaciones",
   data() {
     return {
-      reservado: false
+      reservado: false,
     };
-    
   },
-  computed :{
-    nrolog(){
-       return this.$store.getters.logueado;
-    }
+  computed: {
+    nrolog() {
+      return this.$store.getters.logueado;
+    },
   },
-  methods :{
-    reservar(){
-      alert('confirmar reserva?')
-      this.reservado = true
-    }
-  }
+  methods: {
+    reservar() {
+      alert("confirmar reserva?");
+      this.reservado = true;
+    },
+  },
 };
 </script>
