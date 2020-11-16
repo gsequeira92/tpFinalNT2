@@ -68,7 +68,8 @@
                     >Nombre Usuario</b-card-sub-title
                   >
                   <b-card-text>
-                    Descripcion de nuestra amada planta por intercambiarse publicacion 2
+                    Descripcion de nuestra amada planta por intercambiarse
+                    publicacion 2
                   </b-card-text>
                 </b-card-body>
 
@@ -108,7 +109,7 @@
                 img-src="https://picsum.photos/600/300/?image=400"
                 img-alt="Image"
                 img-top
-                v-show="reservadoPubli3  === false"
+                v-show="reservadoPubli3 === false"
               >
                 <b-card-body>
                   <b-card-title>Nombre Planta</b-card-title>
@@ -163,34 +164,43 @@ export default {
   name: "lista-publicaciones",
   data() {
     return {
+      reservadoPubli1: false,
+      reservadoPubli2: false,
+      reservadoPubli3: false,
+      publicaciones : []
      
-      reservadoPubli1 : false,
-      reservadoPubli2 : false,
-      reservadoPubli3 : false,
-      
     };
   },
   computed: {
     nrolog() {
-      return this.$store.getters.logueado;
-    },
+      return this.$store.getters.getRol;
+    }, 
+  },
+  mounted() {
+    console.log('mounted')
+   this.publicaciones = this.getPublicaciones()
+
   },
   methods: {
+    getPublicaciones() {
+      // TODO traer todas las publicaciones menos la que tienen mi dni o  que esten reservadas
+      const publicaciones = [];
+      return publicaciones;
+    },
     reservaPubli() {
       alert("confirmar reserva?");
-    
-      this.reservadoPubli1= true;
-      
+
+      this.reservadoPubli1 = true;
     },
-    reservaPubli1(){
+    reservaPubli1() {
       alert("confirmar reserva?");
       this.reservadoPubli2 = true;
     },
-    reservaPubli2(){
+    reservaPubli2() {
       alert("confirmar reserva?");
       this.reservadoPubli3 = true;
     },
-    
+
     esAdm() {
       return this.nrolog === 2;
     },
