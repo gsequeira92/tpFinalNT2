@@ -7,8 +7,8 @@
             <b-card-group deck>
               <b-card
                 no-body
-                style="max-width: 20rem;"
-                img-src="https://picsum.photos/600/300/?image=400"
+                style="max-width: 20rem"
+                img-src="https://picsum.photos/600/300/?image=412"
                 img-alt="Image"
                 img-top
                 v-show="reservadoPubli1 === false"
@@ -26,12 +26,31 @@
 
                 <b-card-body>
                   <b-button
+                    v-b-modal.modal-0
                     pill
                     @click="reservaPubli"
                     class="card-link"
                     variant="success"
                     v-show="nrolog === 1"
-                    >Reservar
+                    ><b-modal ref="nuevoModal" id="modal-0" hide-footer title="Confirmar reserva">
+                      <p>Seguro desea reservar esta planta?</p>
+                      <b-button
+                        class="mt-3"
+                        variant="outline-success"
+                        block
+                        @click="reservaPubli"
+                        >Aceptar</b-button
+                      >
+                      <b-button
+                        class="mt-2"
+                        variant="outline-danger"
+                        block
+                        @click="cancelarReserva"
+                        >Cancelar</b-button
+                      >
+                    </b-modal>
+
+                    Reservar
                   </b-button>
                   <b-button
                     pill
@@ -56,7 +75,7 @@
 
               <b-card
                 no-body
-                style="max-width: 20rem;"
+                style="max-width: 20rem"
                 img-src="https://picsum.photos/600/300/?image=400"
                 img-alt="Image"
                 img-top
@@ -75,12 +94,31 @@
 
                 <b-card-body>
                   <b-button
+                    v-b-modal.modal-1
                     pill
                     @click="reservaPubli1"
                     class="card-link"
                     variant="success"
                     v-show="nrolog === 1"
-                    >Reservar
+                    ><b-modal ref="nuevoModal" id="modal-1" hide-footer title="Confirmar reserva">
+                      <p>Seguro desea reservar esta planta?</p>
+                      <b-button
+                        class="mt-3"
+                        variant="outline-success"
+                        block
+                        @click="reservaPubli"
+                        >Aceptar</b-button
+                      >
+                      <b-button
+                        class="mt-2"
+                        variant="outline-danger"
+                        block
+                        @click="cancelarReserva2"
+                        >Cancelar</b-button
+                      >
+                    </b-modal>
+
+                    Reservar
                   </b-button>
                   <b-button
                     pill
@@ -105,8 +143,8 @@
 
               <b-card
                 no-body
-                style="max-width: 20rem;"
-                img-src="https://picsum.photos/600/300/?image=400"
+                style="max-width: 20rem"
+                img-src="https://picsum.photos/600/300/?image=406"
                 img-alt="Image"
                 img-top
                 v-show="reservadoPubli3 === false"
@@ -123,13 +161,32 @@
 
                 <b-card-body>
                   <b-button
+                    v-b-modal.modal-2
                     pill
                     href="#"
                     @click="reservaPubli2()"
                     class="card-link"
                     variant="success"
                     v-if="nrolog === 1"
-                    >Reservar
+                    ><b-modal ref="nuevoModal" id="modal-2" hide-footer title="Confirmar reserva">
+                      <p>Seguro desea reservar esta planta?</p>
+                      <b-button
+                        class="mt-3"
+                        variant="outline-success"
+                        block
+                        @click="reservaPubli"
+                        >Aceptar</b-button
+                      >
+                      <b-button
+                        class="mt-2"
+                        variant="outline-danger"
+                        block
+                        @click="cancelarReserva3"
+                        >Cancelar</b-button
+                      >
+                    </b-modal>
+
+                    Reservar
                   </b-button>
                   <b-button
                     pill
@@ -167,8 +224,11 @@ export default {
       reservadoPubli1: false,
       reservadoPubli2: false,
       reservadoPubli3: false,
+<<<<<<< HEAD
       publicaciones : []
      
+=======
+>>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
     };
   },
   computed: {
@@ -188,22 +248,53 @@ export default {
       return publicaciones;
     },
     reservaPubli() {
+<<<<<<< HEAD
       alert("confirmar reserva?");
 
       this.reservadoPubli1 = true;
     },
     reservaPubli1() {
       alert("confirmar reserva?");
+=======
+      this.reservadoPubli1 = true;
+      this.$refs['nuevoModal'].hide()
+    },
+    reservaPubli1() {
+   
+>>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
       this.reservadoPubli2 = true;
+      this.$refs['nuevoModal'].hide()
     },
     reservaPubli2() {
+<<<<<<< HEAD
       alert("confirmar reserva?");
+=======
+>>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
       this.reservadoPubli3 = true;
+      this.$refs['nuevoModal'].hide()
     },
+<<<<<<< HEAD
 
+=======
+>>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
     esAdm() {
       return this.nrolog === 2;
     },
+    cancelarReserva(){
+      this.reservadoPubli1 = false;
+      this.$refs['nuevoModal'].hide()
+
+    },
+        cancelarReserva2(){
+      this.reservadoPubli2 = false;
+      this.$refs['nuevoModal'].hide()
+
+    },
+        cancelarReserva3(){
+      this.reservadoPubli3 = false;
+      this.$refs['nuevoModal'].hide()
+
+    }
   },
 };
 </script>

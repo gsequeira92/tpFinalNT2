@@ -6,6 +6,11 @@ export const store = new Vuex.Store({
   state: {
     // 0 = no logueado, 1 = logueado, 2 = admin
     nroLoguin: 0,
+
+    //agregar dni al estado centralizado
+    //lista de dni's para loguearse
+    //mounted() va a buscar lista de publicaciones
+
   },
   mutations: {
     loguearUser(state) {
@@ -17,11 +22,15 @@ export const store = new Vuex.Store({
     loguearAdm(state) {
       state.nroLoguin = 2;
     },
+
   },
   actions: {
+   
+
     logUser({ commit }) {
       commit("loguearUser");
     },
+ 
     desLoguear({ commit }) {
       commit("desLog");
     },
