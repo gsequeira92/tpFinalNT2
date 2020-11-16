@@ -13,8 +13,6 @@
           img-height="480"
           background="#ababab"
           style="text-shadow: 1px 1px 2px #333;"
-          @sliding-start="onSlideStart"
-          @sliding-end="onSlideEnd"
           ><b-carousel-slide
            class="d-block img-fluid w-100"
             caption="Primera foto del carrusel"
