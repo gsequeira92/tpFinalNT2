@@ -11,7 +11,7 @@ import {store}from "./store.js"
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false;
-Vue.use(x5GMaps, secrets.googleMapsKey )
+Vue.use(x5GMaps, secrets.mapKey )
 
 new Vue({
   store,

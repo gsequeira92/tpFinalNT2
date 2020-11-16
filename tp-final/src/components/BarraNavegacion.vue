@@ -17,7 +17,6 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-<<<<<<< HEAD
         <b-button style="display:inline-flex;" pill variant="outline-success">
           <b-nav-item-dropdown right> 
           <b-dropdown-item  v-if="nrolog!==0" to="/#/miPerfil" >Mi Perfil logueado</b-dropdown-item>
@@ -25,30 +24,16 @@
           <b-dropdown-item to="/#/login"  v-if="nrolog!==0" >LOG OUT </b-dropdown-item>
           <b-dropdown-item to="/#/login"  @click="logout"  v-if="nrolog===0">LOG IN</b-dropdown-item>
           </b-nav-item-dropdown><b>User Menu</b></b-button>
-=======
-        <b-button style="display: inline-flex" pill variant="outline-success">
-          <b-nav-item-dropdown right>
-            <b-dropdown-item :v-show="nrolog === 1" to="/#/miPerfil"
-              >Mi Perfil logueado</b-dropdown-item
-            >
-            <b-dropdown-item to="/#/login">Mi Perfil</b-dropdown-item>
-            <b-dropdown-item to="/#/login"
-              >LogIn</b-dropdown-item
-            > </b-nav-item-dropdown
-          ><b> User Menu</b></b-button
-        >
->>>>>>> f3c765b12f6fcd4b8d7df4b9dadd9caffa4378f5
       </b-navbar-nav>
     </b-navbar>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
 
 export default { 
   BarraNavegacion: "BarraNavegacion",
-  name: "lista-publicaciones",
+
   data() {
     return {
      
@@ -65,10 +50,6 @@ export default {
        this.$store.dispatch("desLoguear");
     }
   }
-=======
-export default {
-  BarraNavegacion: "BarraNavegacion",
->>>>>>> f3c765b12f6fcd4b8d7df4b9dadd9caffa4378f5
 };
 </script>
 
