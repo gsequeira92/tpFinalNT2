@@ -5,42 +5,42 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     // 0 = no logueado, 1 = logueado, 2 = admin
-    nroLoguin: 0,
-
+    rol: 0,
+    dniUserList: [123, 654, 987],
+    adminKey: 999,
     //agregar dni al estado centralizado
     //lista de dni's para loguearse
     //mounted() va a buscar lista de publicaciones
-
   },
   mutations: {
-    loguearUser(state) {
-      state.nroLoguin = 1;
+    loguearUser(state, rolNuevo) {
+      state.rol = rolNuevo;
     },
-    desLog(state) {
-      state.nroLoguin = 0;
-    },
-    loguearAdm(state) {
-      state.nroLoguin = 2;
-    },
-
   },
   actions: {
-   
-
     logUser({ commit }) {
-      commit("loguearUser");
+      const rolNuevo = 1;
+      commit("loguearUser", rolNuevo);
     },
- 
+
     desLoguear({ commit }) {
-      commit("desLog");
+      const rolNuevo = 0;
+      commit("loguearUser", rolNuevo);
     },
     logAdmin({ commit }) {
-      commit("loguearAdm");
+      const rolNuevo = 2;
+      commit("loguearUser", rolNuevo);
     },
   },
   getters: {
-    logueado: (state) => {
-      return state.nroLoguin;
+    getRol: (state) => {
+      return state.rol;
+    },
+    getUserList: (state) => {
+      return state.dniUserList;
+    },
+    getAdminKey: (state) => {
+      return state.adminKey;
     },
   },
 });

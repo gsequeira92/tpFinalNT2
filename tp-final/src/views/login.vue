@@ -1,16 +1,16 @@
 <template>
   <div>
-    <container>
+    <b-container>
       <b-row class="text-center">
         <b-col> </b-col>
         <b-col cols="5">
           <b-card>
             <b-form-input
-              v-model="usuario"
+              :v-model="usuario"
               placeholder="Ingrese su usuario"
             ></b-form-input>
             <b-form-input
-              v-model="pass"
+              :v-model="pass"
               placeholder="Ingrese su contraseña"
             ></b-form-input>
             <b-button @click="login(usuario)" to="/#/miPerfil" variant="success"
@@ -20,7 +20,7 @@
         </b-col>
         <b-col> </b-col>
       </b-row>
-    </container>
+    </b-container>
   </div>
 </template>
 
@@ -32,11 +32,21 @@ export default {
       pass: "",
     };
   },
-  methods: {
+  computed:{
+      userList () {
+      return this.$store.getters.getUserList;
+    },
+      adminKey(){
+        return this.$store.getters.getAdminKey;
+      }
+    
+  },
+   methods: {
     login(usuario) {
-      if (usuario === 'user') {
+
+      if (this.userList.includes(usuario)) {
         this.$store.dispatch("logUser");
-      } else if (usuario === 'admin') {
+      } else if (usuario === this.adminKey) {
         this.$store.dispatch("logAdmin");
       }
     },

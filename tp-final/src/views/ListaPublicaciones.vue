@@ -1,26 +1,25 @@
 <template>
   <div>
-    <b-container fluid>
+    <b-container>
       <b-row class="vh-100">
         <b-col>
           <b-container>
-            <b-card-group deck>
+            <b-card-group v-for="(publi, p) in publicaciones" :key="p" deck>
               <b-card
                 no-body
                 style="max-width: 20rem"
-                img-src="https://picsum.photos/600/300/?image=412"
+                :img-src= "publi.img"
                 img-alt="Image"
                 img-top
-                v-show="reservadoPubli1 === false"
+                :v-show="publi.estado === false"
               >
                 <b-card-body>
-                  <b-card-title>Nombre Planta</b-card-title>
-                  <b-card-sub-title class="mb-2"
-                    >Nombre Usuario</b-card-sub-title
-                  >
+                  <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
+                  <b-card-sub-title class="mb-2">{{
+                    publi.dni_usuario
+                  }}</b-card-sub-title>
                   <b-card-text>
-                    Descripcion de nuestra amada planta por intercambiarse log
-                    in {{ nrolog }}
+                    {{ publi.descripcion }} {{ nrolog }}
                   </b-card-text>
                 </b-card-body>
 
@@ -31,21 +30,25 @@
                     @click="reservaPubli"
                     class="card-link"
                     variant="success"
-                    v-show="nrolog === 1"
-                    ><b-modal ref="nuevoModal" id="modal-0" hide-footer title="Confirmar reserva">
+                    ><b-modal
+                      ref="nuevoModal"
+                      id="modal-0"
+                      hide-footer
+                      title="Confirmar reserva"
+                    >
                       <p>Seguro desea reservar esta planta?</p>
                       <b-button
                         class="mt-3"
                         variant="outline-success"
                         block
-                        @click="reservaPubli"
+                        @click="reservaPubli(publi.indexOf())"
                         >Aceptar</b-button
                       >
                       <b-button
                         class="mt-2"
                         variant="outline-danger"
                         block
-                        @click="cancelarReserva"
+                        @click="cancelarReserva(publi.indexOf())"
                         >Cancelar</b-button
                       >
                     </b-modal>
@@ -58,152 +61,11 @@
                     class="card-link"
                     variant="success"
                     disabled
-                    v-if="nrolog === 2"
+                    v-if=""
                     >Reservar
                   </b-button>
 
-                  <b-button
-                    pill
-                    href="#"
-                    class="card-link"
-                    variant="secondary"
-                    v-if="nrolog === 2"
-                    >Eliminar</b-button
-                  >
-                </b-card-body>
-              </b-card>
-
-              <b-card
-                no-body
-                style="max-width: 20rem"
-                img-src="https://picsum.photos/600/300/?image=400"
-                img-alt="Image"
-                img-top
-                v-show="reservadoPubli2 !== true"
-              >
-                <b-card-body>
-                  <b-card-title>Nombre Planta</b-card-title>
-                  <b-card-sub-title class="mb-2"
-                    >Nombre Usuario</b-card-sub-title
-                  >
-                  <b-card-text>
-                    Descripcion de nuestra amada planta por intercambiarse
-                    publicacion 2
-                  </b-card-text>
-                </b-card-body>
-
-                <b-card-body>
-                  <b-button
-                    v-b-modal.modal-1
-                    pill
-                    @click="reservaPubli1"
-                    class="card-link"
-                    variant="success"
-                    v-show="nrolog === 1"
-                    ><b-modal ref="nuevoModal" id="modal-1" hide-footer title="Confirmar reserva">
-                      <p>Seguro desea reservar esta planta?</p>
-                      <b-button
-                        class="mt-3"
-                        variant="outline-success"
-                        block
-                        @click="reservaPubli"
-                        >Aceptar</b-button
-                      >
-                      <b-button
-                        class="mt-2"
-                        variant="outline-danger"
-                        block
-                        @click="cancelarReserva2"
-                        >Cancelar</b-button
-                      >
-                    </b-modal>
-
-                    Reservar
-                  </b-button>
-                  <b-button
-                    pill
-                    href="#"
-                    class="card-link"
-                    variant="success"
-                    disabled
-                    v-if="nrolog === 2"
-                    >Reservar
-                  </b-button>
-
-                  <b-button
-                    pill
-                    href="#"
-                    class="card-link"
-                    variant="secondary"
-                    v-if="nrolog === 2"
-                    >Eliminar</b-button
-                  >
-                </b-card-body>
-              </b-card>
-
-              <b-card
-                no-body
-                style="max-width: 20rem"
-                img-src="https://picsum.photos/600/300/?image=406"
-                img-alt="Image"
-                img-top
-                v-show="reservadoPubli3 === false"
-              >
-                <b-card-body>
-                  <b-card-title>Nombre Planta</b-card-title>
-                  <b-card-sub-title class="mb-2"
-                    >Nombre Usuario</b-card-sub-title
-                  >
-                  <b-card-text>
-                    Descripcion de nuestra amada planta por intercambiarse
-                  </b-card-text>
-                </b-card-body>
-
-                <b-card-body>
-                  <b-button
-                    v-b-modal.modal-2
-                    pill
-                    href="#"
-                    @click="reservaPubli2()"
-                    class="card-link"
-                    variant="success"
-                    v-if="nrolog === 1"
-                    ><b-modal ref="nuevoModal" id="modal-2" hide-footer title="Confirmar reserva">
-                      <p>Seguro desea reservar esta planta?</p>
-                      <b-button
-                        class="mt-3"
-                        variant="outline-success"
-                        block
-                        @click="reservaPubli"
-                        >Aceptar</b-button
-                      >
-                      <b-button
-                        class="mt-2"
-                        variant="outline-danger"
-                        block
-                        @click="cancelarReserva3"
-                        >Cancelar</b-button
-                      >
-                    </b-modal>
-
-                    Reservar
-                  </b-button>
-                  <b-button
-                    pill
-                    href="#"
-                    class="card-link"
-                    variant="success"
-                    disabled
-                    v-if="nrolog === 2"
-                    >Reservar
-                  </b-button>
-
-                  <b-button
-                    pill
-                    href="#"
-                    class="card-link"
-                    variant="secondary"
-                    v-if="esAdm()"
+                  <b-button pill href="#" class="card-link" variant="secondary"
                     >Eliminar</b-button
                   >
                 </b-card-body>
@@ -221,80 +83,72 @@ export default {
   name: "lista-publicaciones",
   data() {
     return {
-      reservadoPubli1: false,
-      reservadoPubli2: false,
-      reservadoPubli3: false,
-<<<<<<< HEAD
-      publicaciones : []
-     
-=======
->>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
+      publicaciones: [],
     };
   },
   computed: {
     nrolog() {
       return this.$store.getters.getRol;
-    }, 
+    },
   },
   mounted() {
-    console.log('mounted')
-   this.publicaciones = this.getPublicaciones()
-
+    console.log("mounted");
+    this.publicaciones = this.getPublicaciones()
+    const publiFiltradas = this.publicaciones.filter( e =>{return  e.reservada == false && e.dni_usuario!=36720 }
+     )
+     console.log(publiFiltradas)
+  
+    this.publicaciones = publiFiltradas;
+   
   },
   methods: {
+   
     getPublicaciones() {
       // TODO traer todas las publicaciones menos la que tienen mi dni o  que esten reservadas
       const publicaciones = [];
+      const publi1 = {
+        nombrePlanta: "orquidea",
+        dni_usuario: 36720,
+        descripcion: " soy una orquidea blanca y rosa",
+        img: "https://picsum.photos/600/300/?image=412",
+        reservada: false,
+      };
+      const publi2 = {
+        nombrePlanta: "tomillo",
+        dni_usuario: 51163,
+        descripcion: " soy un tomillo",
+        img: "https://picsum.photos/600/300/?image=400",
+        reservada: false,
+      };
+      const publi3 = {
+        nombrePlanta: "costilla de adan",
+        dni_usuario: 51163,
+        descripcion: " soy una orquidea costilla",
+        img: "https://picsum.photos/600/300/?image=406",
+        reservada: false,
+      };
+      publicaciones.push(publi1);
+      publicaciones.push(publi2);
+      publicaciones.push(publi3);
       return publicaciones;
     },
-    reservaPubli() {
-<<<<<<< HEAD
-      alert("confirmar reserva?");
 
-      this.reservadoPubli1 = true;
+    reservaPubli(nroPubli) {
+      const publicacion = this.publicaciones.find(
+        (e) => e.indexOf() === nroPubli
+      );
+      publicacion.reservada = true;
+      this.$refs["nuevoModal"].hide();
     },
-    reservaPubli1() {
-      alert("confirmar reserva?");
-=======
-      this.reservadoPubli1 = true;
-      this.$refs['nuevoModal'].hide()
-    },
-    reservaPubli1() {
-   
->>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
-      this.reservadoPubli2 = true;
-      this.$refs['nuevoModal'].hide()
-    },
-    reservaPubli2() {
-<<<<<<< HEAD
-      alert("confirmar reserva?");
-=======
->>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
-      this.reservadoPubli3 = true;
-      this.$refs['nuevoModal'].hide()
-    },
-<<<<<<< HEAD
 
-=======
->>>>>>> a0c96067a506843d17057d947a2d1bdc3fb545f4
-    esAdm() {
-      return this.nrolog === 2;
+ 
+    cancelarReserva(nroPubli) {
+      const publicacion = this.publicaciones.find(
+        (e) => e.indexOf() === nroPubli
+      );
+      publicacion.reservada = false;
+      this.$refs["nuevoModal"].hide();
     },
-    cancelarReserva(){
-      this.reservadoPubli1 = false;
-      this.$refs['nuevoModal'].hide()
-
-    },
-        cancelarReserva2(){
-      this.reservadoPubli2 = false;
-      this.$refs['nuevoModal'].hide()
-
-    },
-        cancelarReserva3(){
-      this.reservadoPubli3 = false;
-      this.$refs['nuevoModal'].hide()
-
-    }
   },
 };
 </script>
