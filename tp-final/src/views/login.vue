@@ -8,12 +8,13 @@
             <b-form-input
               :v-model="usuario"
               placeholder="Ingrese su usuario"
+              type="text"
             ></b-form-input>
             <b-form-input
               :v-model="pass"
               placeholder="Ingrese su contraseña"
             ></b-form-input>
-            <b-button @click="login(usuario)" to="/#/miPerfil" variant="success"
+            <b-button @submit="login" to="/#/miPerfil" variant="success"
               >Ingresar</b-button
             >
           </b-card>
@@ -28,25 +29,28 @@
 export default {
   data() {
     return {
-      usuario: "",
-      pass: "",
+      usuario: null,
+      pass: null,
     };
   },
-  computed:{
-      userList () {
+  computed: {
+    userList() {
       return this.$store.getters.getUserList;
     },
-      adminKey(){
-        return this.$store.getters.getAdminKey;
-      }
-    
+    adminKey() {
+      return this.$store.getters.getAdminKey;
+    },
   },
-   methods: {
-    login(usuario) {
+  methods: {
+    login: function (usuario) {
+      this.usuario = usuario;
+      console.log(usuario);
 
-      if (this.userList.includes(usuario)) {
+      //Preguntar mañana al profe por parametros del evento y como usarlos como payload
+      if (this.userList.includes(this.usuario)) {
         this.$store.dispatch("logUser");
-      } else if (usuario === this.adminKey) {
+        this.$store.dispatch("setCurrentUser", this.usuario);
+      } else if (this.usuario === this.adminKey) {
         this.$store.dispatch("logAdmin");
       }
     },

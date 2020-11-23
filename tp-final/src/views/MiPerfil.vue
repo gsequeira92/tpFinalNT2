@@ -15,14 +15,12 @@
               ></b-img>
             </template>
 
-            <h5 class="mt-0">Usuario</h5>
+            <h5 class="mt-0">Usuario {{usuario}}</h5>
             <p>
-              Esta es alguna descripcion puntual del usuario que esta disponible
-              al revisar el perfil
+              {{descripcionUsuario}}
             </p>
             <p>
-              Aca el espacio continua para poner otra información personal de
-              contacto o alguna preferencia de green box
+              {informacionPersonal}
             </p>
             <hr />
             <b-media>
@@ -44,12 +42,10 @@
                   shift-h="3"
                   shift-v="-1"
                 ></b-icon>
-                Primer intercambio del usuario
+                Primer intercambio del usuario {{usuario}}
               </h5>
               <p class="mb-0">
-                Esta es la descricion de la planta intercambiada con algunas
-                caracteristicas y detalles puntuales del intercambio o
-                comentarios entre usuarios
+                {{primerIntercambio}}
               </p>
             </b-media>
             <hr />
@@ -61,6 +57,30 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+
+  data(){
+    return{
+
+      usuario : "2",
+      descripcionUsuario : "desc",
+      informacionPersonal: "info",
+      primerIntercambio:"primer",
+    }
+  },
+  mounted(){
+    //Toda esta data dinamica la vamos a traer con 
+    //1) El dni del usuario logueado desde el store
+    //2)Buscando al usuario con ese DNI en la persistencia que tuvieramos y seteando los valores de data()
+
+    // const usuarioDNI = this.$store.getters.getLoggedUser
+    // //const usuario = DbUsuarios.filter(e=>e.getDni === usuarioDNI)
+    // this.usuario = usuarioDNI
+    // this.descripcionUsuario = usuario.descripcion
+    // this.informacionPersonal = usuario.informacionPersonal
+    // this.primerIntercambio = usuario.primerIntercambio
+  }
+};
 </script>
 

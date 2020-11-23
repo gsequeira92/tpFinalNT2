@@ -1,10 +1,11 @@
 <template>
   <div>
-    <b-container>
+    <h1 left>Publicaciones Disponibles:</h1>
+    <hr width="100%" size="10" noshade="noshade">
       <b-row class="vh-100">
-        <b-col>
           <b-container>
-            <b-card-group v-for="(publi, p) in publicaciones" :key="p" deck>
+            <b-card-group columns>
+              <b-col v-for="(publi, p) in publicaciones" :key="p">
               <b-card
                 no-body
                 style="max-width: 20rem"
@@ -41,14 +42,14 @@
                         class="mt-3"
                         variant="outline-success"
                         block
-                        @click="reservaPubli(publi.indexOf())"
+                        @click="reservaPubli()"
                         >Aceptar</b-button
                       >
                       <b-button
                         class="mt-2"
                         variant="outline-danger"
                         block
-                        @click="cancelarReserva(publi.indexOf())"
+                        @click="cancelarReserva()"
                         >Cancelar</b-button
                       >
                     </b-modal>
@@ -61,7 +62,7 @@
                     class="card-link"
                     variant="success"
                     disabled
-                    v-if=""
+                    v-if="nrolog == 1"
                     >Reservar
                   </b-button>
 
@@ -70,11 +71,11 @@
                   >
                 </b-card-body>
               </b-card>
+              </b-col>
             </b-card-group>
           </b-container>
-        </b-col>
       </b-row>
-    </b-container>
+
   </div>
 </template>
 
@@ -93,8 +94,10 @@ export default {
   },
   mounted() {
     console.log("mounted");
+    console.log(this.$store.getters.getLoggedUser)
     this.publicaciones = this.getPublicaciones()
-    const publiFiltradas = this.publicaciones.filter( e =>{return  e.reservada == false && e.dni_usuario!=36720 }
+    //Ahora esta filtrando las publicaciones por NO RESERVADAS Y QUE NO TENGAN MI DNI
+    const publiFiltradas = this.publicaciones.filter( e =>{return  e.reservada == false && e.dni_usuario!= this.$store.getters.getLoggedUser }
      )
      console.log(publiFiltradas)
   
@@ -104,7 +107,6 @@ export default {
   methods: {
    
     getPublicaciones() {
-      // TODO traer todas las publicaciones menos la que tienen mi dni o  que esten reservadas
       const publicaciones = [];
       const publi1 = {
         nombrePlanta: "orquidea",
@@ -130,6 +132,7 @@ export default {
       publicaciones.push(publi1);
       publicaciones.push(publi2);
       publicaciones.push(publi3);
+
       return publicaciones;
     },
 
