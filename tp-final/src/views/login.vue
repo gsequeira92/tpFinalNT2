@@ -6,15 +6,14 @@
         <b-col cols="5">
           <b-card>
             <b-form-input
-              :v-model="usuario"
+              v-model="usuario"
               placeholder="Ingrese su usuario"
-              type="text"
             ></b-form-input>
             <b-form-input
-              :v-model="pass"
+              v-model="pass"
               placeholder="Ingrese su contraseña"
             ></b-form-input>
-            <b-button @submit="login" to="/#/miPerfil" variant="success"
+            <b-button @click="login" to="/#/miPerfil" variant="success"
               >Ingresar</b-button
             >
           </b-card>
@@ -26,11 +25,12 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      usuario: null,
-      pass: null,
+      usuario: "",
+      pass: "",
     };
   },
   computed: {
@@ -42,17 +42,19 @@ export default {
     },
   },
   methods: {
-    login: function (usuario) {
-      this.usuario = usuario;
-      console.log(usuario);
+    login: function () {
 
-      //Preguntar mañana al profe por parametros del evento y como usarlos como payload
-      if (this.userList.includes(this.usuario)) {
+        console.log(this.usuario);
         this.$store.dispatch("logUser");
         this.$store.dispatch("setCurrentUser", this.usuario);
-      } else if (this.usuario === this.adminKey) {
-        this.$store.dispatch("logAdmin");
-      }
+
+      //Preguntar mañana al profe por parametros del evento y como usarlos como payload
+      // if (this.userList.includes(this.usuario)) {
+      //   this.$store.dispatch("logUser");
+      //   this.$store.dispatch("setCurrentUser", this.usuario);
+      // } else if (this.usuario === this.adminKey) {
+      //   this.$store.dispatch("logAdmin");
+      // }
     },
   },
 };

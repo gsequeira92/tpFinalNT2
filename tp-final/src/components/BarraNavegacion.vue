@@ -51,10 +51,10 @@
             <b-dropdown-item to="/#/login" v-if="nrolog === 0"
               >Mi Perfil</b-dropdown-item
             >
-            <b-dropdown-item to="/#/login" v-if="nrolog !== 0"
+            <b-dropdown-item to="/#/login" @click="logout"  v-if="nrolog !== 0"
               >LOG OUT
             </b-dropdown-item>
-            <b-dropdown-item to="/#/login" @click="logout" v-if="nrolog === 0"
+            <b-dropdown-item to="/#/login" v-if="nrolog === 0"
               >LOG IN</b-dropdown-item
             > </b-nav-item-dropdown
           ><b>User Menu {{ nrolog }}</b></b-button

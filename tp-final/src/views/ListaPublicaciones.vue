@@ -92,12 +92,13 @@ export default {
     nrolog() {
       return this.$store.getters.getRol;
     },
-    
+
   },
   mounted() {
     console.log("mounted");
     console.log(this.$store.getters.getLoggedUser);
     //this.publicaciones = this.getPublicaciones();
+    
     //Ahora esta filtrando las publicaciones por NO RESERVADAS Y QUE NO TENGAN MI DNI
     const publiFiltradas = this.publicaciones.filter(
       (e) =>

@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
   state: {
     // 0 = no logueado, 1 = logueado, 2 = admin
     rol: 0,
-    //dniUserList: [123, 654, 987],
+    dniUserList: [123, 654, 987],
     adminKey: 999,
     loggedUser:73
 
@@ -20,13 +20,15 @@ export const store = new Vuex.Store({
       state.rol = rolNuevo;
     },
     //G:-Setea el dni del usuario actual del state
-    setearDni(state,{dni}){
+    setearDni(state,dni){
+      console.log("mutacion", dni)
       state.loggedUser= dni
     }
   },
   actions: {
     logUser({ commit }) {
       const rolNuevo = 1;
+      console.log(rolNuevo)
       commit("loguearUser", rolNuevo);
     },
 
@@ -40,6 +42,7 @@ export const store = new Vuex.Store({
     },
     //G:-Agrego esta action para la mutation que setea el dni actual loggeado
     setCurrentUser({commit}, dni){
+      console.log("Action", dni)
       commit("setearDni",dni)
     }
   },

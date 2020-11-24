@@ -78,7 +78,7 @@ export default {
   async created() {
     try {
       const usuarios = await axios.get(
-        "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario"
+        "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario/"
       );
       this.apiUser = usuarios.data;
       const usuarioLogueado = this.apiUser.find((e) => e.dni == this.$store.getter.getLoggedUser);
