@@ -10,9 +10,9 @@ export const store = new Vuex.Store({
   state: {
     // 0 = no logueado, 1 = logueado, 2 = admin
     rol: 0,
-    dniUserList: [123, 654, 987],
+    //dniUserList: [123, 654, 987],
     adminKey: 999,
-    loggedUser:-1
+    loggedUser:73
 
   },
   mutations: {

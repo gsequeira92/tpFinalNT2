@@ -6,12 +6,22 @@
           <img src="https://placekitten.com/30/30" alt="gato" />
         </b-navbar-brand>
         <b-nav-item tag="h1" class="mb-0" disabled
-          >OUR PLANT FINDER APP  </b-nav-item
-        >
+          >OUR PLANT FINDER APP
+        </b-nav-item>
         <b-nav-item v-b-popover.hover.bottomright="'Pagina principal'" to="/"
           >Home</b-nav-item
         >
         <b-nav-item
+          v-if="nrolog === 0"
+          disabled
+          v-b-popover.hover.bottomright="
+            'Ver tu perfil e información de contacto'
+          "
+          to="/#/miPerfil"
+          >Mi Perfil</b-nav-item
+        >
+        <b-nav-item
+          v-if="nrolog === 1"
           v-b-popover.hover.bottomright="
             'Ver tu perfil e información de contacto'
           "
@@ -47,7 +57,7 @@
             <b-dropdown-item to="/#/login" @click="logout" v-if="nrolog === 0"
               >LOG IN</b-dropdown-item
             > </b-nav-item-dropdown
-          ><b>User Menu {{nrolog}}</b></b-button
+          ><b>User Menu {{ nrolog }}</b></b-button
         >
       </b-navbar-nav>
     </b-navbar>

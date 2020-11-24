@@ -1,9 +1,9 @@
 <template>
   <div class="MiPerfil">
-    <b-container >
+    <b-container>
       <h1>Mi Perfil</h1>
-      
-      <b-row align-v="stretch" >
+
+      <b-row align-v="stretch">
         <b-card>
           <b-media>
             <template #aside>
@@ -15,12 +15,12 @@
               ></b-img>
             </template>
 
-            <h5 class="mt-0">Usuario {{usuario}}</h5>
+            <h5 class="mt-0">Usuario {{ usuario }}</h5>
             <p>
-              {{descripcionUsuario}}
+              {{ descripcionUsuario }}
             </p>
             <p>
-              {informacionPersonal}
+              {{ informacionPersonal }}
             </p>
             <hr />
             <b-media>
@@ -42,10 +42,10 @@
                   shift-h="3"
                   shift-v="-1"
                 ></b-icon>
-                Primer intercambio del usuario {{usuario}}
+                Primer intercambio del usuario {{ usuario }}
               </h5>
               <p class="mb-0">
-                {{primerIntercambio}}
+                {{ primerIntercambio }}
               </p>
             </b-media>
             <hr />
@@ -57,30 +57,41 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-
-
-  data(){
-    return{
-
-      usuario : "2",
-      descripcionUsuario : "desc",
-      informacionPersonal: "info",
-      primerIntercambio:"primer",
-    }
+  data() {
+    return {
+      usuario: "",
+      descripcionUsuario: "",
+      informacionPersonal: "",
+      primerIntercambio: "",
+      apiUser: [],
+    };
   },
-  mounted(){
-    //Toda esta data dinamica la vamos a traer con 
+  mounted() {
+    //Toda esta data dinamica la vamos a traer con
     //1) El dni del usuario logueado desde el store
     //2)Buscando al usuario con ese DNI en la persistencia que tuvieramos y seteando los valores de data()
-
     // const usuarioDNI = this.$store.getters.getLoggedUser
-    // //const usuario = DbUsuarios.filter(e=>e.getDni === usuarioDNI)
-    // this.usuario = usuarioDNI
-    // this.descripcionUsuario = usuario.descripcion
-    // this.informacionPersonal = usuario.informacionPersonal
-    // this.primerIntercambio = usuario.primerIntercambio
-  }
+  },
+  async created() {
+    try {
+      const usuarios = await axios.get(
+        "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario"
+      );
+      this.apiUser = usuarios.data;
+      const usuarioLogueado = this.apiUser.find((e) => e.dni == this.$store.getter.getLoggedUser);
+      this.usuario = usuarioLogueado.dni
+      this.descripcionUsuario = usuarioLogueado.Descripcion;
+      this.informacionPersonal = usuarioLogueado.InformacionPersonal;
+      this.primerIntercambio = usuarioLogueado.PrimerIntercambio;
+     
+    } catch (error) {
+      alert("hubo un error, auxilio");
+    }
+  },
+
 };
 </script>
 
