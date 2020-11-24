@@ -57,7 +57,10 @@
             <b-dropdown-item to="/#/login" v-if="nrolog === 0"
               >LOG IN</b-dropdown-item
             > </b-nav-item-dropdown
-          ><b>User Menu {{ nrolog }}</b></b-button
+          ><b>Menu-
+            Permisos nivel: {{ nrolog }}-
+            Hola usuario {{getUser}} !
+            </b></b-button
         >
       </b-navbar-nav>
     </b-navbar>
@@ -75,6 +78,9 @@ export default {
     nrolog() {
       return this.$store.getters.getRol;
     },
+    getUser(){
+      return this.$store.getters.getLoggedUser;
+    }
   },
   methods: {
     logout() {
