@@ -3,7 +3,7 @@
     <h1 left>Publicaciones Disponibles:</h1>
     <hr width="100%" size="10" noshade="noshade" />
     <b-row class="vh-100">
-      <b-container>
+      <b-container fluid>
         <b-card-group columns>
           <b-col v-for="(publi, p) in publicaciones" :key="p">
             <b-card
@@ -20,7 +20,7 @@
                   publi.dni_usuario
                 }}</b-card-sub-title>
                 <b-card-text>
-                  {{ publi.descripcion }} {{ nrolog }}
+                  {{ publi.descripcion }}
                 </b-card-text>
               </b-card-body>
 
@@ -28,6 +28,7 @@
                 <b-button
                   v-b-modal.modal-0
                   pill
+                   v-if="nrolog == 1"
                   @click="reservaPubli"
                   class="card-link"
                   variant="success"
@@ -56,17 +57,7 @@
 
                   Reservar
                 </b-button>
-                <b-button
-                  pill
-                  href="#"
-                  class="card-link"
-                  variant="success"
-                  disabled
-                  v-if="nrolog == 1"
-                  >Reservar
-                </b-button>
-
-                <b-button pill href="#" class="card-link" variant="secondary"
+                <b-button pill  v-if="nrolog == 2" href="#" class="card-link" variant="danger"
                   >Eliminar</b-button
                 >
               </b-card-body>
@@ -121,36 +112,6 @@ export default {
     }
   },
   methods: {
-    getPublicaciones() {
-      const publicaciones = [];
-      const publi1 = {
-        nombrePlanta: "orquidea",
-        dni_usuario: 36720,
-        descripcion: " soy una orquidea blanca y rosa",
-        img: "https://picsum.photos/600/300/?image=412",
-        reservada: false,
-      };
-      const publi2 = {
-        nombrePlanta: "tomillo",
-        dni_usuario: 51163,
-        descripcion: " soy un tomillo",
-        img: "https://picsum.photos/600/300/?image=400",
-        reservada: false,
-      };
-      const publi3 = {
-        nombrePlanta: "costilla de adan",
-        dni_usuario: 51163,
-        descripcion: " soy una orquidea costilla",
-        img: "https://picsum.photos/600/300/?image=406",
-        reservada: false,
-      };
-      publicaciones.push(publi1);
-      publicaciones.push(publi2);
-      publicaciones.push(publi3);
-
-      return publicaciones;
-    },
-
     reservaPubli(nroPubli) {
       const publicacion = this.publicaciones.find(
         (e) => e.indexOf() === nroPubli

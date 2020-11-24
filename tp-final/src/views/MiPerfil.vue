@@ -66,32 +66,26 @@ export default {
       descripcionUsuario: "",
       informacionPersonal: "",
       primerIntercambio: "",
-      apiUser: [],
+      baseUrl: "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario/",
+      usuarioLogueado: "",
     };
   },
-  mounted() {
-    //Toda esta data dinamica la vamos a traer con
-    //1) El dni del usuario logueado desde el store
-    //2)Buscando al usuario con ese DNI en la persistencia que tuvieramos y seteando los valores de data()
-    // const usuarioDNI = this.$store.getters.getLoggedUser
-  },
+  mounted() {},
   async created() {
     try {
-      const usuarios = await axios.get(
-        "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario/"
+      const unUsuario = await axios.get(
+        this.baseUrl += this.$store.getters.getLoggedUser
       );
-      this.apiUser = usuarios.data;
-      const usuarioLogueado = this.apiUser.find((e) => e.dni == this.$store.getter.getLoggedUser);
-      this.usuario = usuarioLogueado.dni
-      this.descripcionUsuario = usuarioLogueado.Descripcion;
-      this.informacionPersonal = usuarioLogueado.InformacionPersonal;
-      this.primerIntercambio = usuarioLogueado.PrimerIntercambio;
-     
+      this.usuarioLogueado = unUsuario.data;
+      console.log("EL USUARIO LOGUEADO ES " + this.usuarioLogueado.dni);
+      this.usuario = this.usuarioLogueado.dni;
+      this.descripcionUsuario = this.usuarioLogueado.Descripcion;
+      this.informacionPersonal = this.usuarioLogueado.InformacionPersonal;
+      this.primerIntercambio = this.usuarioLogueado.PrimerIntercambio;
     } catch (error) {
       alert("hubo un error, auxilio");
     }
   },
-
 };
 </script>
 

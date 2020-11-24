@@ -1,18 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
+
 Vue.use(Vuex);
 
     //-agregar dni al estado centralizado - DONE
     //-lista de dni's para loguearse - DONE
-    //-mounted() va a buscar lista de publicaciones
 
 export const store = new Vuex.Store({
   state: {
     // 0 = no logueado, 1 = logueado, 2 = admin
     rol: 0,
-    dniUserList: [123, 654, 987],
     adminKey: 999,
-    loggedUser:73
+    loggedUser: -1
 
   },
   mutations: {
@@ -28,7 +27,6 @@ export const store = new Vuex.Store({
   actions: {
     logUser({ commit }) {
       const rolNuevo = 1;
-      console.log(rolNuevo)
       commit("loguearUser", rolNuevo);
     },
 
@@ -50,9 +48,6 @@ export const store = new Vuex.Store({
     getRol: (state) => {
       return state.rol;
     },
-    getUserList: (state) => {
-      return state.dniUserList;
-    },
     getAdminKey: (state) => {
       return state.adminKey;
     },
@@ -62,4 +57,5 @@ export const store = new Vuex.Store({
       return state.loggedUser
     }
   },
+
 });
