@@ -142,6 +142,7 @@ export default {
       try {
         let publicacion = await axios.put(this.baseUrl + indice, {
           estaReservada: true,
+          dni_usuario : this.$store.getters.getLoggedUser,
         });
         console.log(publicacion.data);
        
