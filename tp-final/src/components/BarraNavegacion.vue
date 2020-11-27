@@ -28,6 +28,7 @@
           to="/#/miPerfil"
           >Mi Perfil</b-nav-item
         >
+
         <b-nav-item
           v-b-popover.hover.bottomright="
             'Conoce el listado de publicaciones que tenemos'
@@ -40,7 +41,9 @@
           to="/#/mapaPublicaciones"
           >Mapa</b-nav-item
         >
+
       </b-navbar-nav>
+
 
       <b-navbar-nav class="ml-auto">
         <b-button style="display: inline-flex" pill variant="outline-success">

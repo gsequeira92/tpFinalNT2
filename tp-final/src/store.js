@@ -12,7 +12,9 @@ export const store = new Vuex.Store({
     rol: 0,
     adminKey: 999,
     loggedUser: -1,
-    plantaPorReservar: ""
+    plantaPorReservar: "",
+    plantasReservadas:[],
+    plantasEliminadas:[],
 
   },
   mutations: {
@@ -28,6 +30,14 @@ export const store = new Vuex.Store({
       console.log("mutacionPlanta")
       state.plantaPorReservar = planta
     },
+    agregarPlantaReservada(state,planta){
+      console.log("mutacionPlanta")
+      state.plantasReservadas.push(planta)
+    },
+    agregarPlantaEliminada(state,planta){
+      console.log("mutacionPlanta")
+      state.plantasEliminadas.push(planta)
+    }
 
   },
   actions: {
@@ -50,9 +60,20 @@ export const store = new Vuex.Store({
       commit("setearDni",dni)
     },
     setPlantaPorReservar({commit}, planta){
-      console.log("ActionPlanta", planta)
+      console.log("ActionPlanta1", planta)
       commit("setearPlantaPorReservar",planta)
+    },
+    addPlantaReservada({commit}, planta){
+      console.log("ActionPlanta2", planta)
+      commit("agregarPlantaReservada",planta)
+
+    },
+    addPlantaEliminada({commit}, planta){
+      console.log("ActionPlanta3", planta)
+      commit("agregarPlantaEliminada",planta)
+
     }
+
   },
   getters: {
     getRol: (state) => {
@@ -68,7 +89,14 @@ export const store = new Vuex.Store({
     },
     getPlantaPorReservar:(state)=>{
       return state.plantaPorReservar
+    },
+    getPlantasReservadas:(state)=>{
+      return state.plantasReservadas
+    },
+    getPlantasEliminadas:(state)=>{
+      return state.plantasEliminadas
     }
+
   },
 
 });

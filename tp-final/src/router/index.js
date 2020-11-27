@@ -49,6 +49,15 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/ReservaCompleta.vue")
    
   },
+  
+  {
+  path: "/reportes",
+  name: "ReporteAdmin",
+  component: () =>
+    import(/* webpackChunkName: "about" */ "../views/ReporteAdmin.vue")
+  },
+
+
 ];
 
 const router = new VueRouter({

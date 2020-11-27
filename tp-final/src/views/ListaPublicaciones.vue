@@ -3,6 +3,8 @@
     <h1 left>Publicaciones Disponibles:</h1>
     <hr width="100%" size="10" noshade="noshade" />
     <b-row class="vh-100">
+      <b-button v-if="nrolog == 2" block to="/#/ReporteAdmin"><b-icon icon="clipboard-check"></b-icon>  Ver reporte Publicaciones</b-button>
+      <hr width="100%" size="10" noshade="noshade" >
       <b-card-group columns>
         <b-container deck>
           <b-card
@@ -173,18 +175,29 @@ export default {
     },
 
     async eliminarPublicacion(publi){
-      let indice = this.publicaciones.indexOf(publi)
+      let indice = publi.id
       console.log(indice)
       try {
         let publicacion = await axios.delete(this.baseUrl+indice)
         console.log(publicacion)
-        this.publicaciones.splice(indice, 1);
+        const indiceAborrar = this.publicaciones.findIndex(e=> e.id == publicacion.id)
+        if(indiceAborrar != -1){
+          this.publicaciones.splice(indiceAborrar,1)
+        }
         this.$bvModal.hide("modal-1");
+
       } catch (error) {
         alert("hubo un error reservando la publicacion");
         console.log(error);
         
       }
+
+
+// Con respecto al último punto, lo que tienen que mandarle al endpoint es el ID de la publicación.
+// Luego, una vez el ok del borrado, tienen que eliminar esa publicación del array en el front.  La idea es usar el método findIndex de Array. 
+//Recibe una función anónima en donde comparamos el id de cada publicación con el id del elemento eliminado.
+// Si existe el elemento, la función retorna el index, sino retorna -1.
+// Ya con el index pueden usar splice(indiceEncontrado,1) para eliminar el elemento.
 
 
 
