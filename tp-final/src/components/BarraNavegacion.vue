@@ -17,7 +17,7 @@
           v-b-popover.hover.bottomright="
             'Ver tu perfil e información de contacto'
           "
-          to="/#/miPerfil"
+          to="/miPerfil"
           >Mi Perfil</b-nav-item
         >
         <b-nav-item
@@ -25,7 +25,7 @@
           v-b-popover.hover.bottomright="
             'Ver tu perfil e información de contacto'
           "
-          to="/#/miPerfil"
+          to="/miPerfil"
           >Mi Perfil</b-nav-item
         >
 
@@ -33,12 +33,12 @@
           v-b-popover.hover.bottomright="
             'Conoce el listado de publicaciones que tenemos'
           "
-          to="/#/listaPublicaciones"
+          to="/listaPublicaciones"
           >Listado Publicaciones</b-nav-item
         >
         <b-nav-item
           v-b-popover.hover.bottomright="'Ubica tu buzón verde mas cercano!'"
-          to="/#/mapaPublicaciones"
+          to="/mapaPublicaciones"
           >Mapa</b-nav-item
         >
 
@@ -48,16 +48,16 @@
       <b-navbar-nav class="ml-auto">
         <b-button style="display: inline-flex" pill variant="outline-success">
           <b-nav-item-dropdown right>
-            <b-dropdown-item v-if="nrolog !== 0" to="/#/miPerfil"
+            <b-dropdown-item v-if="nrolog !== 0" to="/miPerfil"
               >Mi Perfil logueado</b-dropdown-item
             >
-            <b-dropdown-item to="/#/login" v-if="nrolog === 0"
+            <b-dropdown-item to="/login" v-if="nrolog === 0"
               >Mi Perfil</b-dropdown-item
             >
-            <b-dropdown-item to="/#/login" @click="logout"  v-if="nrolog !== 0"
+            <b-dropdown-item to="/login" @click="logout"  v-if="nrolog !== 0"
               >LOG OUT
             </b-dropdown-item>
-            <b-dropdown-item to="/#/login" v-if="nrolog === 0"
+            <b-dropdown-item to="/login" v-if="nrolog === 0"
               >LOG IN</b-dropdown-item
             > </b-nav-item-dropdown
           ><b>Menu-

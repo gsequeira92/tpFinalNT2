@@ -3,7 +3,7 @@
     <h1 left>Publicaciones Disponibles:</h1>
     <hr width="100%" size="10" noshade="noshade" />
     <b-row class="vh-100">
-      <b-button v-if="nrolog == 2" block to="/#/ReporteAdmin"><b-icon icon="clipboard-check"></b-icon>  Ver reporte Publicaciones</b-button>
+      <b-button v-if="nrolog == 2" block to="/reportes"><b-icon icon="clipboard-check"></b-icon>  Ver reporte Publicaciones</b-button>
       <hr width="100%" size="10" noshade="noshade" >
       <b-card-group columns>
         <b-container deck>
