@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     // 0 = no logueado, 1 = logueado, 2 = admin
     rol: 0,
     adminKey: 999,
-    loggedUser: -1
+    loggedUser: -1,
+    plantaPorReservar: ""
 
   },
   mutations: {
@@ -22,7 +23,12 @@ export const store = new Vuex.Store({
     setearDni(state,dni){
       console.log("mutacion", dni)
       state.loggedUser= dni
-    }
+    },
+    setearPlantaPorReservar(state,planta){
+      console.log("mutacionPlanta")
+      state.plantaPorReservar = planta
+    },
+
   },
   actions: {
     logUser({ commit }) {
@@ -42,6 +48,10 @@ export const store = new Vuex.Store({
     setCurrentUser({commit}, dni){
       console.log("Action", dni)
       commit("setearDni",dni)
+    },
+    setPlantaPorReservar({commit}, planta){
+      console.log("ActionPlanta", planta)
+      commit("setearPlantaPorReservar",planta)
     }
   },
   getters: {
@@ -55,6 +65,9 @@ export const store = new Vuex.Store({
     //Esto deberia usarse para filtrar todo lo que se muestra, segun el usuario logueado
     getLoggedUser:(state) =>{
       return state.loggedUser
+    },
+    getPlantaPorReservar:(state)=>{
+      return state.plantaPorReservar
     }
   },
 

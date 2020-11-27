@@ -137,8 +137,11 @@ export default {
   },
   methods: {
     async reservaPubli(publi) {
-      let indice = this.publicaciones.lastIndexOf(publi);
+      let indice = this.publicaciones.indexOf(publi);
       console.log(indice);
+      if(indice != -1){
+        this.$store.dispatch('setPlantaPorReservar',publi)
+      }
       try {
         let publicacion = await axios.put(this.baseUrl + indice, {
           estaReservada: true,
@@ -147,6 +150,7 @@ export default {
         console.log(publicacion.data);
        
         this.$bvModal.hide("modal-0");
+        this.$router.push({ path: "/reserva" });
       } catch (error) {
         alert("hubo un error reservando la publicacion");
         console.log(error);

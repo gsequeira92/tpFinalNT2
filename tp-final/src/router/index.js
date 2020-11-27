@@ -44,9 +44,9 @@ const routes = [
   },
   {
     path: "/reserva",
-    name: "reserva",
+    name: "ReservaCompleta",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Reserva.vue")
+      import(/* webpackChunkName: "about" */ "../views/ReservaCompleta.vue")
    
   },
 ];

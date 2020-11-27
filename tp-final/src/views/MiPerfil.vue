@@ -8,7 +8,7 @@
           <b-media>
             <template #aside>
               <b-img
-                src="https://picsum.photos/600/300/?image=40"
+                :src="imagenUsuario"
                 blank-color="#ccc"
                 width="250"
                 alt="placeholder"
@@ -26,7 +26,7 @@
             <b-media>
               <template #aside>
                 <b-img
-                  src="https://picsum.photos/600/300/?image=35"
+                  src="https://picsum.photos/600/300/?image=400"
                   blank-color="#ccc"
                   width="80"
                   alt="placeholder"
@@ -68,6 +68,7 @@ export default {
       primerIntercambio: "",
       baseUrl: "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario/",
       usuarioLogueado: "",
+      imagenUsuario: ""
     };
   },
   mounted() {},
@@ -82,6 +83,7 @@ export default {
       this.descripcionUsuario = this.usuarioLogueado.Descripcion;
       this.informacionPersonal = this.usuarioLogueado.InformacionPersonal;
       this.primerIntercambio = this.usuarioLogueado.PrimerIntercambio;
+      this.imagenUsuario = this.usuarioLogueado.Imagen;
     } catch (error) {
       alert("hubo un error, auxilio");
     }
