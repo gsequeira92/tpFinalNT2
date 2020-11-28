@@ -24,7 +24,7 @@
           >
             <b-card-body>
               <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
-              <b-card-sub-title class="mb-2">{{
+              <b-card-sub-title class="mb-2">Usuario: {{
                 publi.dni_usuario
               }}</b-card-sub-title>
               <b-card-text>
