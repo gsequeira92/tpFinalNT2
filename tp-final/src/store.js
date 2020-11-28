@@ -13,7 +13,6 @@ export const store = new Vuex.Store({
     adminKey: 999,
     loggedUser: -1,
     plantaPorReservar: "",
-    plantasReservadas:[],
     plantasEliminadas:[],
 
   },
@@ -29,10 +28,6 @@ export const store = new Vuex.Store({
     setearPlantaPorReservar(state,planta){
       console.log("mutacionPlanta")
       state.plantaPorReservar = planta
-    },
-    agregarPlantaReservada(state,planta){
-      console.log("mutacionPlanta")
-      state.plantasReservadas.push(planta)
     },
     agregarPlantaEliminada(state,planta){
       console.log("mutacionPlanta")
@@ -63,11 +58,7 @@ export const store = new Vuex.Store({
       console.log("ActionPlanta1", planta)
       commit("setearPlantaPorReservar",planta)
     },
-    addPlantaReservada({commit}, planta){
-      console.log("ActionPlanta2", planta)
-      commit("agregarPlantaReservada",planta)
 
-    },
     addPlantaEliminada({commit}, planta){
       console.log("ActionPlanta3", planta)
       commit("agregarPlantaEliminada",planta)
@@ -90,13 +81,9 @@ export const store = new Vuex.Store({
     getPlantaPorReservar:(state)=>{
       return state.plantaPorReservar
     },
-    getPlantasReservadas:(state)=>{
-      return state.plantasReservadas
-    },
     getPlantasEliminadas:(state)=>{
       return state.plantasEliminadas
     }
-
   },
 
 });

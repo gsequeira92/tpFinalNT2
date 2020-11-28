@@ -3,8 +3,11 @@
     <h1 left>Publicaciones Disponibles:</h1>
     <hr width="100%" size="10" noshade="noshade" />
     <b-row class="vh-100">
-      <b-button v-if="nrolog == 2" block to="/reportes"><b-icon icon="clipboard-check"></b-icon>  Ver reporte Publicaciones</b-button>
-      <hr width="100%" size="10" noshade="noshade" >
+      <b-button v-if="nrolog == 2" block to="/reportes"
+        ><b-icon icon="clipboard-check"></b-icon> Ver reporte
+        Publicaciones</b-button
+      >
+      <hr width="100%" size="10" noshade="noshade" />
       <b-card-group columns>
         <b-container deck>
           <b-card
@@ -15,7 +18,9 @@
             :img-src="publi.img"
             img-alt="Image"
             img-top
-            v-show="publi.estaReservada === false && publi.dni_usuario != getUser"
+            v-show="
+              publi.estaReservada === false && publi.dni_usuario != getUser
+            "
           >
             <b-card-body>
               <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
@@ -65,9 +70,7 @@
                 href="#"
                 class="card-link"
                 variant="danger"
-
                 ><b-modal
-                   
                   ref="nuevoModalCancelacion"
                   id="modal-1"
                   hide-footer
@@ -80,8 +83,8 @@
                     block
                     @click="eliminarPublicacion(publi)"
                     >Eliminar</b-button
-                  >
-                </b-modal>Eliminar</b-button
+                  > </b-modal
+                >Eliminar</b-button
               >
             </b-card-body>
           </b-card>
@@ -95,16 +98,16 @@
 
 <script>
 /**
- * FALTA RESOLVER PARA EL BORRADO: 
+ * FALTA RESOLVER PARA EL BORRADO:
  * QUE EL EVENTO BORRE EXACTAMENTE LA PUBLICACION QUE DEBERIA POR INDICE
  * POR ALGUNA RAZON AHORA ESTA BORRANDO EN ORDEN DESCENDENTE DEL ARRAY
- * 
+ *
  * PARA LA RESERVA:
- * CREO QUE YA ESTARIA RESUELTO, HAY QUE VER QUE HACEMOS POST RESERVA, SI SE LA ASIGNAMOS AL USUARIO LOGUEADO 
+ * CREO QUE YA ESTARIA RESUELTO, HAY QUE VER QUE HACEMOS POST RESERVA, SI SE LA ASIGNAMOS AL USUARIO LOGUEADO
  * O SI LO DEJAMOS ASI (CAMBIANDO EL FLAG A "RESERVADA" NADA MAS)
- * 
+ *
  * AXIOS/MOCKAPI:
- * LA RESERVA Y EL BORRADO ESTAN PEGANDOLE DIRECTO A LA API, ASI QUE LOS CAMBIOS SE PUEDEN VER EN MOCKAPI A MEDIDA 
+ * LA RESERVA Y EL BORRADO ESTAN PEGANDOLE DIRECTO A LA API, ASI QUE LOS CAMBIOS SE PUEDEN VER EN MOCKAPI A MEDIDA
  * QUE SE VAN HACIENDO
  */
 import axios from "axios";
@@ -121,13 +124,12 @@ export default {
     nrolog() {
       return this.$store.getters.getRol;
     },
-    getUser(){
-      return  this.$store.getters.getLoggedUser
-    }
-
+    getUser() {
+      return this.$store.getters.getLoggedUser;
+    },
   },
   async created() {
-    console.log('SE CARGAN TODAS LAS PUBLICACIONES DE LA API')
+    console.log("SE CARGAN TODAS LAS PUBLICACIONES DE LA API");
     try {
       const publicaciones = await axios.get(
         "https://5fbbcc9fc09c200016d4122c.mockapi.io/publiPlantas"
@@ -141,16 +143,16 @@ export default {
     async reservaPubli(publi) {
       let indice = this.publicaciones.indexOf(publi);
       console.log(indice);
-      if(indice != -1){
-        this.$store.dispatch('setPlantaPorReservar',publi)
+      if (indice != -1) {
+        this.$store.dispatch("setPlantaPorReservar", publi);
       }
       try {
         let publicacion = await axios.put(this.baseUrl + indice, {
           estaReservada: true,
-          dni_usuario : this.$store.getters.getLoggedUser,
+          dni_usuario: this.$store.getters.getLoggedUser,
         });
         console.log(publicacion.data);
-       
+
         this.$bvModal.hide("modal-0");
         this.$router.push({ path: "/reserva" });
       } catch (error) {
@@ -174,34 +176,30 @@ export default {
       }
     },
 
-    async eliminarPublicacion(publi){
-      let indice = publi.id
-      console.log(indice)
+    async eliminarPublicacion(publi) {
+      let indice = publi.id;
+      console.log(indice);
       try {
-        let publicacion = await axios.delete(this.baseUrl+indice)
-        console.log(publicacion)
-        const indiceAborrar = this.publicaciones.findIndex(e=> e.id == publicacion.id)
-        if(indiceAborrar != -1){
-          this.publicaciones.splice(indiceAborrar,1)
+        let publicacion = await axios.delete(this.baseUrl + indice);
+        this.$store.dispatch("addPlantaEliminada", publicacion);
+        const indiceAborrar = this.publicaciones.findIndex(
+          (e) => e.id == publicacion.id
+        );
+        if (indiceAborrar != -1) {
+          this.publicaciones.splice(indiceAborrar, 1);
         }
         this.$bvModal.hide("modal-1");
-
       } catch (error) {
         alert("hubo un error reservando la publicacion");
         console.log(error);
-        
       }
 
-
-// Con respecto al último punto, lo que tienen que mandarle al endpoint es el ID de la publicación.
-// Luego, una vez el ok del borrado, tienen que eliminar esa publicación del array en el front.  La idea es usar el método findIndex de Array. 
-//Recibe una función anónima en donde comparamos el id de cada publicación con el id del elemento eliminado.
-// Si existe el elemento, la función retorna el index, sino retorna -1.
-// Ya con el index pueden usar splice(indiceEncontrado,1) para eliminar el elemento.
-
-
-
-    }
+      // Con respecto al último punto, lo que tienen que mandarle al endpoint es el ID de la publicación.
+      // Luego, una vez el ok del borrado, tienen que eliminar esa publicación del array en el front.  La idea es usar el método findIndex de Array.
+      //Recibe una función anónima en donde comparamos el id de cada publicación con el id del elemento eliminado.
+      // Si existe el elemento, la función retorna el index, sino retorna -1.
+      // Ya con el index pueden usar splice(indiceEncontrado,1) para eliminar el elemento.
+    },
   },
 };
 </script>
