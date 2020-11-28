@@ -180,17 +180,20 @@ export default {
       let indice = publi.id;
       console.log(indice);
       try {
-        let publicacion = await axios.delete(this.baseUrl + indice);
-        this.$store.dispatch("addPlantaEliminada", publicacion);
+        let publicacion = await axios.delete(this.baseUrl + indice); 
+        // llamada a la api para hacer el POST mandando publicacion
+        await axios.post("https://5fbbcc9fc09c200016d4122c.mockapi.io/Eliminadas",publi);
+        //this.$store.dispatch("addPlantaEliminada", publicacion); 
         const indiceAborrar = this.publicaciones.findIndex(
-          (e) => e.id == publicacion.id
+          (e) => e.id == publicacion.id // antes decia publicacion,id
         );
         if (indiceAborrar != -1) {
           this.publicaciones.splice(indiceAborrar, 1);
         }
         this.$bvModal.hide("modal-1");
+
       } catch (error) {
-        alert("hubo un error reservando la publicacion");
+        alert("hubo un error eliminando la publicacion");
         console.log(error);
       }
 

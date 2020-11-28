@@ -76,10 +76,16 @@ export default {
         "https://5fbbcc9fc09c200016d4122c.mockapi.io/publiPlantas/?estaReservada=true"
       );
       this.valorReservadas = publicacionesReservadas.data.length;
-
+//
+      const publicacionesEliminadas = await axios.get(
+        "https://5fbbcc9fc09c200016d4122c.mockapi.io/Eliminadas"
+      );
+      this.valorEliminadas = publicacionesEliminadas.data.length; 
+      // HACER ESTO CON LAS ELIMINADAS
       //Guardamos las eliminadas en el store para poder accederlas despues de eliminarlas
-      this.valorEliminadas = this.$store.getters.getPlantasEliminadas.length;
-
+     
+     //this.valorEliminadas = this.$store.getters.getPlantasEliminadas.length;
+ 
       const usuarios = await axios.get(
         "https://5fbbcc9fc09c200016d4122c.mockapi.io/Usuario"
       );
