@@ -5,7 +5,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <h5>Disponibles</h5>
+          <h5> <b-icon icon="clipboard-plus"></b-icon>   Disponibles</h5>
           <b-progress
             :value="valorDisponibles"
             show-value
@@ -14,7 +14,7 @@
             animated
           ></b-progress>
 
-          <h5>Reservadas</h5>
+          <h5>   <b-icon icon="check-circle"></b-icon> Reservadas</h5>
           <b-progress
             :value="valorReservadas"
             show-value
@@ -23,7 +23,7 @@
             animated
           ></b-progress>
 
-          <h5>Eliminadas</h5>
+          <h5> <b-icon icon="dash-circle"></b-icon> Eliminadas</h5>
           <b-progress
             :value="valorEliminadas"
             show-value
@@ -36,14 +36,15 @@
       <hr />
     </b-container>
     <h1>Reporte de Usuarios:</h1>
+    <hr>
     <b-container>
       <b-row>
         <b-col>
-          <h5>Activos</h5>
+          <h5> <b-icon icon="emoji-laughing"></b-icon>   Activos</h5>
           <b-progress
             :value="valorUsuariosActivos"
             show-value
-            variant="primary"
+            variant="warning"
             class="mb-3"
             animated
           ></b-progress>
