@@ -40,21 +40,21 @@ const routes = [
     name: "login",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/login.vue")
-   
+
   },
   {
     path: "/reserva",
     name: "ReservaCompleta",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ReservaCompleta.vue")
-   
+
   },
-  
+
   {
-  path: "/reportes",
-  name: "ReporteAdmin",
-  component: () =>
-    import(/* webpackChunkName: "about" */ "../views/ReporteAdmin.vue")
+    path: "/reportes",
+    name: "ReporteAdmin",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ReporteAdmin.vue")
   },
 
 

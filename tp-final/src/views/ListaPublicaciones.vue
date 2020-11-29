@@ -24,9 +24,9 @@
           >
             <b-card-body>
               <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
-              <b-card-sub-title class="mb-2">Usuario: {{
-                publi.dni_usuario
-              }}</b-card-sub-title>
+              <b-card-sub-title class="mb-2"
+                >Usuario: {{ publi.dni_usuario }}</b-card-sub-title
+              >
               <b-card-text>
                 {{ publi.descripcion }}
               </b-card-text>
@@ -141,18 +141,22 @@ export default {
   },
   methods: {
     async reservaPubli(publi) {
-      let indice = this.publicaciones.indexOf(publi);
+      let indice = publi.id;
       console.log(indice);
-      if (indice != -1) {
-        this.$store.dispatch("setPlantaPorReservar", publi);
-      }
+
       try {
-        let publicacion = await axios.put(this.baseUrl + indice, {
+        const publicacion = await axios.put(this.baseUrl + indice, {
           estaReservada: true,
           dni_usuario: this.$store.getters.getLoggedUser,
         });
         console.log(publicacion.data);
+        this.$store.dispatch(
+            "setPlantaPorReservar",
+            publicacion.data
+          );
 
+
+          
         this.$bvModal.hide("modal-0");
         this.$router.push({ path: "/reserva" });
       } catch (error) {
@@ -180,10 +184,13 @@ export default {
       let indice = publi.id;
       console.log(indice);
       try {
-        let publicacion = await axios.delete(this.baseUrl + indice); 
+        let publicacion = await axios.delete(this.baseUrl + indice);
         // llamada a la api para hacer el POST mandando publicacion
-        await axios.post("https://5fbbcc9fc09c200016d4122c.mockapi.io/Eliminadas",publi);
-        //this.$store.dispatch("addPlantaEliminada", publicacion); 
+        await axios.post(
+          "https://5fbbcc9fc09c200016d4122c.mockapi.io/Eliminadas",
+          publi
+        );
+        //this.$store.dispatch("addPlantaEliminada", publicacion);
         const indiceAborrar = this.publicaciones.findIndex(
           (e) => e.id == publicacion.id // antes decia publicacion,id
         );
@@ -191,17 +198,10 @@ export default {
           this.publicaciones.splice(indiceAborrar, 1);
         }
         this.$bvModal.hide("modal-1");
-
       } catch (error) {
         alert("hubo un error eliminando la publicacion");
         console.log(error);
       }
-
-      // Con respecto al último punto, lo que tienen que mandarle al endpoint es el ID de la publicación.
-      // Luego, una vez el ok del borrado, tienen que eliminar esa publicación del array en el front.  La idea es usar el método findIndex de Array.
-      //Recibe una función anónima en donde comparamos el id de cada publicación con el id del elemento eliminado.
-      // Si existe el elemento, la función retorna el index, sino retorna -1.
-      // Ya con el index pueden usar splice(indiceEncontrado,1) para eliminar el elemento.
     },
   },
 };

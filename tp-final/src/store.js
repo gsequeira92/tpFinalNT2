@@ -13,8 +13,6 @@ export const store = new Vuex.Store({
     adminKey: 999,
     loggedUser: -1,
     plantaPorReservar: "",
-    ///plantasEliminadas:[], // BORRAR ESTO LUEGO
-
   },
   mutations: {
     loguearUser(state, rolNuevo) {
@@ -27,15 +25,9 @@ export const store = new Vuex.Store({
     },
     setearPlantaPorReservar(state,planta){
       console.log("mutacionPlanta")
+      console.log(planta)
       state.plantaPorReservar = planta
     },
-
-  /* // ESTO VUELA TMB
-    agregarPlantaEliminada(state,planta){
-      console.log("mutacionPlanta")
-      state.plantasEliminadas.push(planta)
-    }
-*/
   },
   actions: {
     logUser({ commit }) {
@@ -60,15 +52,9 @@ export const store = new Vuex.Store({
     },
     setPlantaPorReservar({commit}, planta){
       console.log("ActionPlanta1", planta)
+      console.log('ESTA ES LA PLANTA', planta)
       commit("setearPlantaPorReservar",planta)
     },
-  /*// VOLAR
-    addPlantaEliminada({commit}, planta){
-      console.log("ActionPlanta3", planta)
-      commit("agregarPlantaEliminada",planta)
-
-    }
-*/
   },
   getters: {
     getRol: (state) => {
@@ -85,10 +71,6 @@ export const store = new Vuex.Store({
     getPlantaPorReservar:(state)=>{
       return state.plantaPorReservar
     },
-  /* //VOLAR
-    getPlantasEliminadas:(state)=>{
-      return state.plantasEliminadas
-    }*/
   },
 
 });

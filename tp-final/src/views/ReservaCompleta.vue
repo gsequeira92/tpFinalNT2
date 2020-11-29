@@ -1,18 +1,21 @@
 <template>
   <div>
-    <h1>Reserva Completa!</h1>
+    <b-container fluid>
+      <b-row>
+        <h1>Reserva Completa!</h1>
+      </b-row>
+    </b-container>
     <hr />
     <b-row>
       <h2><b-icon icon="bag"></b-icon>Resumen:</h2>
-        <b-icon
-
-          icon="arrow-right-circle"
-          shift-h="470"
-          shift-v="-20"
-          scale="2.8"
-          variant="success"
-          animation="cylon"
-        ></b-icon>
+      <b-icon
+        icon="arrow-right-circle"
+        shift-h="470"
+        shift-v="-20"
+        scale="2.8"
+        variant="success"
+        animation="cylon"
+      ></b-icon>
     </b-row>
     <div>
       <b-card-group deck>
@@ -25,7 +28,6 @@
           <b-card-text> *Usuario: {{ nombreDueñoAnterior }} </b-card-text>
           *{{ nombrePlanta }}</b-card
         >
-
 
         <b-card
           title="Hacia:"
