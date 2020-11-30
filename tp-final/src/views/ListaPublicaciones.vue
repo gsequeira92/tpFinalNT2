@@ -97,19 +97,6 @@
 
 
 <script>
-/**
- * FALTA RESOLVER PARA EL BORRADO:
- * QUE EL EVENTO BORRE EXACTAMENTE LA PUBLICACION QUE DEBERIA POR INDICE
- * POR ALGUNA RAZON AHORA ESTA BORRANDO EN ORDEN DESCENDENTE DEL ARRAY
- *
- * PARA LA RESERVA:
- * CREO QUE YA ESTARIA RESUELTO, HAY QUE VER QUE HACEMOS POST RESERVA, SI SE LA ASIGNAMOS AL USUARIO LOGUEADO
- * O SI LO DEJAMOS ASI (CAMBIANDO EL FLAG A "RESERVADA" NADA MAS)
- *
- * AXIOS/MOCKAPI:
- * LA RESERVA Y EL BORRADO ESTAN PEGANDOLE DIRECTO A LA API, ASI QUE LOS CAMBIOS SE PUEDEN VER EN MOCKAPI A MEDIDA
- * QUE SE VAN HACIENDO
- */
 import axios from "axios";
 
 export default {
@@ -140,34 +127,35 @@ export default {
     }
   },
   methods: {
+    //siempre llega la ultima del array en posicion 7 y id=8 
     async reservaPubli(publi) {
-      let indice = publi.id;
-      console.log(indice);
+      const indiceApi = publi.id;
+      console.log("Esta es la publicacion nro", publi.id);
+      const publicacion = this.publicaciones.find(
+        (element) => element.id == publi.id
+      );
 
-      try {
-        const publicacion = await axios.put(this.baseUrl + indice, {
-          estaReservada: true,
-          dni_usuario: this.$store.getters.getLoggedUser,
-        });
-        console.log(publicacion.data);
-        this.$store.dispatch(
-            "setPlantaPorReservar",
-            publicacion.data
-          );
+      if (indiceApi != -1) {
+        console.log("Entro al if");
+        this.$store.dispatch("setPlantaPorReservar", publicacion);
 
-
-          
-        this.$bvModal.hide("modal-0");
-        this.$router.push({ path: "/reserva" });
-      } catch (error) {
-        alert("hubo un error reservando la publicacion");
-        console.log(error);
+        try {
+          await axios.put(this.baseUrl + indiceApi, {
+            estaReservada: true,
+            dni_usuario: this.$store.getters.getLoggedUser,
+          });
+          this.$bvModal.hide("modal-0");
+          this.$router.push({ path: "/reserva" });
+        } catch (error) {
+          alert("hubo un error reservando la publicacion");
+          console.log(error);
+        }
       }
     },
 
     async cancelarReserva(publi) {
       let indice = this.publicaciones.indexOf(publi);
-      console.log(indice);
+
       try {
         let publicacion = await axios.put(this.baseUrl + indice, {
           estaReservada: false,
@@ -190,9 +178,8 @@ export default {
           "https://5fbbcc9fc09c200016d4122c.mockapi.io/Eliminadas",
           publi
         );
-        //this.$store.dispatch("addPlantaEliminada", publicacion);
         const indiceAborrar = this.publicaciones.findIndex(
-          (e) => e.id == publicacion.id // antes decia publicacion,id
+          (e) => e.id == publicacion.id
         );
         if (indiceAborrar != -1) {
           this.publicaciones.splice(indiceAborrar, 1);
