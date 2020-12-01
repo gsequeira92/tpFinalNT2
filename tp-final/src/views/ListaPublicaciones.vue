@@ -9,91 +9,44 @@
       >
       <hr width="100%" size="10" noshade="noshade" />
       <b-card-group columns>
-        <b-container deck>
-          <b-card
-            v-for="(publi, p) in publicaciones"
-            :key="p"
-            no-body
-            style="max-width: 20rem"
-            :img-src="publi.img"
-            img-alt="Image"
-            img-top
-            v-show="
-              publi.estaReservada === false && publi.dni_usuario != getUser
-            "
-          >
-            <b-card-body>
-              <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
-              <b-card-sub-title class="mb-2"
-                >Usuario: {{ publi.dni_usuario }}</b-card-sub-title
-              >
-              <b-card-text>
-                {{ publi.descripcion }}
-              </b-card-text>
-            </b-card-body>
-            <b-card-body>
-              <b-button
-                v-if="nroLog == 1"
-                class="card-link"
-                variant="success"
-<<<<<<< HEAD
-                @click="reservaPubli(publi)"
-              >
-=======
-                ><b-modal
-                  ref="nuevoModal"
-                  id="modal-0"
-                  hide-footer
-                  title="Confirmar reserva"
-                >
-                  <p>Seguro desea reservar esta planta?</p>
-                  <b-button
-                    class="mt-3"
-                    variant="outline-success"
-                    block
-                    v-on:click.stop="reservaPubli(publi)"
-                    >Aceptar</b-button
-                  >
-                  <b-button
-                    class="mt-2"
-                    variant="outline-danger"
-                    block
-                    v-on:click.stop="cancelarReserva(publi)"
-                    >Cancelar</b-button
-                  >
-                </b-modal>
->>>>>>> 1ac8fe40d372811e86f4f518517993e4dbbbe335
-                Reservar
-              </b-button>
-              <b-button
-                v-if="nroLog == 2"
-                class="mt-2"
-                variant="danger"
-<<<<<<< HEAD
-                @click="eliminarPublicacion(publi)"
-=======
-                ><b-modal
-                  ref="nuevoModalCancelacion"
-                  id="modal-1"
-                  hide-footer
-                  title="Confirmar Borrado"
-                >
-                  <p>Seguro desea Eliminar esta publicacion?</p>
-                  <b-button
-                    class="mt-2"
-                    variant="outline-danger"
-                    block
-                    v-on:click.stop="eliminarPublicacion(publi)"
-                    >Eliminar</b-button
-                  > </b-modal
-                >Eliminar</b-button
->>>>>>> 1ac8fe40d372811e86f4f518517993e4dbbbe335
-              >
-                Eliminar
-              </b-button>
-            </b-card-body>
-          </b-card>
-        </b-container>
+        <b-card
+          v-for="(publi, p) in publicaciones"
+          :key="p"
+          no-body
+          style="max-width: 20rem"
+          :img-src="publi.img"
+          img-alt="Image"
+          img-top
+          v-show="publi.estaReservada === false && publi.dni_usuario != getUser"
+        >
+          <b-card-body>
+            <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
+            <b-card-sub-title class="mb-2"
+              >Usuario: {{ publi.dni_usuario }}</b-card-sub-title
+            >
+            <b-card-text>
+              {{ publi.descripcion }}
+            </b-card-text>
+
+            <b-button
+              v-show="nrolog == 1"
+              pill
+              variant="success"
+              @click="reservaPubli(publi)"
+            >
+              Reservar
+            </b-button>
+
+            <b-button
+              v-show="nrolog == 2"
+              pill
+              variant="danger"
+              @click="eliminarPublicacion(publi)"
+            >
+              Eliminar
+            </b-button>
+          </b-card-body>
+        </b-card>
       </b-card-group>
     </b-row>
   </div>
@@ -137,24 +90,18 @@ export default {
       let publicacionIDX = this.publicaciones.findIndex(
         (e) => e.id == publi.id
       );
-
-      let publicacion = this.publicaciones.find(
-        (element) => element.id == publicacionIDX
-      );
-      let indiceApi = publicacionIDX;
       console.log("Esta es la publicacion nro", publi.id);
 
-      if (indiceApi != -1 && publicacion) {
+      if (publicacionIDX != -1) {
         console.log("Entro al if");
-        this.$store.dispatch("setPlantaPorReservar", publicacion);
+        this.$store.dispatch("setPlantaPorReservar", publi);
 
         try {
-          await axios.put(this.baseUrl + indiceApi, {
+          await axios.put(this.baseUrl + publicacionIDX, {
             estaReservada: true,
             dni_usuario: this.$store.getters.getLoggedUser,
           });
 
-          indiceApi = "";
           this.$bvModal.hide("modal-0");
           this.$router.push({ path: "/reserva" });
         } catch (error) {
