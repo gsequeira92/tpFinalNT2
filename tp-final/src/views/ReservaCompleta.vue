@@ -7,7 +7,7 @@
     </b-container>
     <hr />
     <b-row>
-      <h2><b-icon icon="bag"></b-icon>Resumen:</h2>
+      <h2> <b-icon icon="bag"></b-icon>Resumen:</h2>
       <b-icon
         icon="arrow-right-circle"
         shift-h="470"

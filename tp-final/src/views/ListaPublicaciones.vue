@@ -36,15 +36,58 @@
                 v-if="nroLog == 1"
                 class="card-link"
                 variant="success"
+<<<<<<< HEAD
                 @click="reservaPubli(publi)"
               >
+=======
+                ><b-modal
+                  ref="nuevoModal"
+                  id="modal-0"
+                  hide-footer
+                  title="Confirmar reserva"
+                >
+                  <p>Seguro desea reservar esta planta?</p>
+                  <b-button
+                    class="mt-3"
+                    variant="outline-success"
+                    block
+                    v-on:click.stop="reservaPubli(publi)"
+                    >Aceptar</b-button
+                  >
+                  <b-button
+                    class="mt-2"
+                    variant="outline-danger"
+                    block
+                    v-on:click.stop="cancelarReserva(publi)"
+                    >Cancelar</b-button
+                  >
+                </b-modal>
+>>>>>>> 1ac8fe40d372811e86f4f518517993e4dbbbe335
                 Reservar
               </b-button>
               <b-button
                 v-if="nroLog == 2"
                 class="mt-2"
                 variant="danger"
+<<<<<<< HEAD
                 @click="eliminarPublicacion(publi)"
+=======
+                ><b-modal
+                  ref="nuevoModalCancelacion"
+                  id="modal-1"
+                  hide-footer
+                  title="Confirmar Borrado"
+                >
+                  <p>Seguro desea Eliminar esta publicacion?</p>
+                  <b-button
+                    class="mt-2"
+                    variant="outline-danger"
+                    block
+                    v-on:click.stop="eliminarPublicacion(publi)"
+                    >Eliminar</b-button
+                  > </b-modal
+                >Eliminar</b-button
+>>>>>>> 1ac8fe40d372811e86f4f518517993e4dbbbe335
               >
                 Eliminar
               </b-button>
@@ -89,13 +132,19 @@ export default {
   methods: {
     //siempre llega la ultima del array en posicion 7 y id=8
     async reservaPubli(publi) {
-      const indiceApi = publi.id;
-      console.log("Esta es la publicacion nro", publi.id);
-      const publicacion = this.publicaciones.find(
-        (element) => element.id == publi.id
+      console.log("ESTAS SON TODAS LAS PUBLICACIONES", this.publicaciones);
+
+      let publicacionIDX = this.publicaciones.findIndex(
+        (e) => e.id == publi.id
       );
 
-      if (indiceApi != -1) {
+      let publicacion = this.publicaciones.find(
+        (element) => element.id == publicacionIDX
+      );
+      let indiceApi = publicacionIDX;
+      console.log("Esta es la publicacion nro", publi.id);
+
+      if (indiceApi != -1 && publicacion) {
         console.log("Entro al if");
         this.$store.dispatch("setPlantaPorReservar", publicacion);
 
@@ -104,6 +153,8 @@ export default {
             estaReservada: true,
             dni_usuario: this.$store.getters.getLoggedUser,
           });
+
+          indiceApi = "";
           this.$bvModal.hide("modal-0");
           this.$router.push({ path: "/reserva" });
         } catch (error) {
