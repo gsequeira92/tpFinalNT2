@@ -31,61 +31,23 @@
                 {{ publi.descripcion }}
               </b-card-text>
             </b-card-body>
-
             <b-card-body>
               <b-button
-                v-b-modal.modal-0
-                pill
-                v-if="nrolog == 1"
+                v-if="nroLog == 1"
                 class="card-link"
                 variant="success"
-                ><b-modal
-                  ref="nuevoModal"
-                  id="modal-0"
-                  hide-footer
-                  title="Confirmar reserva"
-                >
-                  <p>Seguro desea reservar esta planta?</p>
-                  <b-button
-                    class="mt-3"
-                    variant="outline-success"
-                    block
-                    @click="reservaPubli(publi)"
-                    >Aceptar</b-button
-                  >
-                  <b-button
-                    class="mt-2"
-                    variant="outline-danger"
-                    block
-                    @click="cancelarReserva(publi)"
-                    >Cancelar</b-button
-                  >
-                </b-modal>
+                @click="reservaPubli(publi)"
+              >
                 Reservar
               </b-button>
               <b-button
-                v-b-modal.modal-1
-                pill
-                v-if="nrolog == 2"
-                href="#"
-                class="card-link"
+                v-if="nroLog == 2"
+                class="mt-2"
                 variant="danger"
-                ><b-modal
-                  ref="nuevoModalCancelacion"
-                  id="modal-1"
-                  hide-footer
-                  title="Confirmar Borrado"
-                >
-                  <p>Seguro desea Eliminar esta publicacion?</p>
-                  <b-button
-                    class="mt-2"
-                    variant="outline-danger"
-                    block
-                    @click="eliminarPublicacion(publi)"
-                    >Eliminar</b-button
-                  > </b-modal
-                >Eliminar</b-button
+                @click="eliminarPublicacion(publi)"
               >
+                Eliminar
+              </b-button>
             </b-card-body>
           </b-card>
         </b-container>
@@ -93,8 +55,6 @@
     </b-row>
   </div>
 </template>
-
-
 
 <script>
 import axios from "axios";
@@ -127,7 +87,7 @@ export default {
     }
   },
   methods: {
-    //siempre llega la ultima del array en posicion 7 y id=8 
+    //siempre llega la ultima del array en posicion 7 y id=8
     async reservaPubli(publi) {
       const indiceApi = publi.id;
       console.log("Esta es la publicacion nro", publi.id);

@@ -71,7 +71,7 @@ export default {
       imagenUsuario: ""
     };
   },
-  mounted() {},
+ 
   async created() {
     try {
       const unUsuario = await axios.get(

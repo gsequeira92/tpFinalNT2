@@ -62,7 +62,7 @@ export default {
     },
   },
   created() {
-    const publicacionOriginal = this.obtenerPlantaAReservar;
+    let publicacionOriginal = this.obtenerPlantaAReservar;
 
     this.nombreDueñoAnterior = publicacionOriginal.dni_usuario;
     this.imagenPlanta = publicacionOriginal.img;
