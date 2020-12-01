@@ -50,14 +50,14 @@
                     class="mt-3"
                     variant="outline-success"
                     block
-                    @click="reservaPubli(publi)"
+                    v-on:click.stop="reservaPubli(publi)"
                     >Aceptar</b-button
                   >
                   <b-button
                     class="mt-2"
                     variant="outline-danger"
                     block
-                    @click="cancelarReserva(publi)"
+                    v-on:click.stop="cancelarReserva(publi)"
                     >Cancelar</b-button
                   >
                 </b-modal>
@@ -81,7 +81,7 @@
                     class="mt-2"
                     variant="outline-danger"
                     block
-                    @click="eliminarPublicacion(publi)"
+                    v-on:click.stop="eliminarPublicacion(publi)"
                     >Eliminar</b-button
                   > </b-modal
                 >Eliminar</b-button
@@ -127,15 +127,21 @@ export default {
     }
   },
   methods: {
-    //siempre llega la ultima del array en posicion 7 y id=8 
+    //siempre llega la ultima del array en posicion 7 y id=8
     async reservaPubli(publi) {
-      const indiceApi = publi.id;
-      console.log("Esta es la publicacion nro", publi.id);
-      const publicacion = this.publicaciones.find(
-        (element) => element.id == publi.id
+      console.log("ESTAS SON TODAS LAS PUBLICACIONES", this.publicaciones);
+
+      let publicacionIDX = this.publicaciones.findIndex(
+        (e) => e.id == publi.id
       );
 
-      if (indiceApi != -1) {
+      let publicacion = this.publicaciones.find(
+        (element) => element.id == publicacionIDX
+      );
+      let indiceApi = publicacionIDX;
+      console.log("Esta es la publicacion nro", publi.id);
+
+      if (indiceApi != -1 && publicacion) {
         console.log("Entro al if");
         this.$store.dispatch("setPlantaPorReservar", publicacion);
 
@@ -144,6 +150,8 @@ export default {
             estaReservada: true,
             dni_usuario: this.$store.getters.getLoggedUser,
           });
+
+          indiceApi = "";
           this.$bvModal.hide("modal-0");
           this.$router.push({ path: "/reserva" });
         } catch (error) {

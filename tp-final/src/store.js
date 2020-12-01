@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
     rol: 0,
     adminKey: 999,
     loggedUser: -1,
-    plantaPorReservar: null,
+    plantaPorReservar: "",
   },
   mutations: {
     loguearUser(state, rolNuevo) {
