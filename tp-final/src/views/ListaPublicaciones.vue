@@ -5,13 +5,13 @@
     <b-row class="vh-100">
       <b-button v-if="nrolog == 2" block to="/reportes"
         ><b-icon icon="clipboard-check"></b-icon> Ver reporte
-        Publicaciones</b-button
+        Publicaciones/Usuarios</b-button
       >
       <hr width="100%" size="10" noshade="noshade" />
       <b-card-group columns>
         <b-card
-          v-for="(publi, p) in publicaciones"
-          :key="p"
+          v-for="publi in publicaciones"
+          :key="publi.id"
           no-body
           style="max-width: 20rem"
           :img-src="publi.img"
@@ -22,7 +22,8 @@
           <b-card-body>
             <b-card-title>{{ publi.nombrePlanta }}</b-card-title>
             <b-card-sub-title class="mb-2"
-              >Usuario: {{ publi.dni_usuario }}</b-card-sub-title
+              >Usuario: {{ publi.dni_usuario }} IdPublicacion:
+              {{ publi.id }}</b-card-sub-title
             >
             <b-card-text>
               {{ publi.descripcion }}
@@ -86,43 +87,26 @@ export default {
     //siempre llega la ultima del array en posicion 7 y id=8
     async reservaPubli(publi) {
       console.log("ESTAS SON TODAS LAS PUBLICACIONES", this.publicaciones);
-
-      let publicacionIDX = this.publicaciones.findIndex(
-        (e) => e.id == publi.id
-      );
       console.log("Esta es la publicacion nro", publi.id);
 
-      if (publicacionIDX != -1) {
+      if (publi) {
         console.log("Entro al if");
         this.$store.dispatch("setPlantaPorReservar", publi);
 
         try {
-          await axios.put(this.baseUrl + publicacionIDX, {
+          const publiApi = await axios.put(this.baseUrl + publi.id, {
             estaReservada: true,
             dni_usuario: this.$store.getters.getLoggedUser,
           });
 
-          this.$bvModal.hide("modal-0");
+          console.log("ESTA ES LA PUBLICACION", publi);
+          console.log("ESTO DEVUELVE LA API", publiApi.data);
+
           this.$router.push({ path: "/reserva" });
         } catch (error) {
           alert("hubo un error reservando la publicacion");
           console.log(error);
         }
-      }
-    },
-
-    async cancelarReserva(publi) {
-      let indice = this.publicaciones.indexOf(publi);
-
-      try {
-        let publicacion = await axios.put(this.baseUrl + indice, {
-          estaReservada: false,
-        });
-        console.log(publicacion.data);
-        this.$bvModal.hide("modal-0");
-      } catch (error) {
-        alert("hubo un error reservando la publicacion");
-        console.log(error);
       }
     },
 
@@ -132,17 +116,20 @@ export default {
       try {
         let publicacion = await axios.delete(this.baseUrl + indice);
         // llamada a la api para hacer el POST mandando publicacion
-        await axios.post(
+        const nuevaEliminada = await axios.post(
           "https://5fbbcc9fc09c200016d4122c.mockapi.io/Eliminadas",
           publi
         );
+        console.log('SE ELIMINO LA PUBLICACION:', nuevaEliminada.data)
         const indiceAborrar = this.publicaciones.findIndex(
           (e) => e.id == publicacion.id
         );
         if (indiceAborrar != -1) {
           this.publicaciones.splice(indiceAborrar, 1);
         }
-        this.$bvModal.hide("modal-1");
+         this.$router.go()
+       
+
       } catch (error) {
         alert("hubo un error eliminando la publicacion");
         console.log(error);
